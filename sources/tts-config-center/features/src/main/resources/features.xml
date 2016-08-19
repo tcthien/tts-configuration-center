@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="tts-configcenter-${pom.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.6/xml/features</repository>
+    <repository>mvn:org.ops4j.pax.jdbc/pax-jdbc-features/0.8.0/xml/features</repository>
+
+    <feature name="tts-configcenter" version="${pom.version}">
+        <feature>tts-configcenter-persistence</feature>
+        <feature>tts-configcenter-service</feature>
+        <feature>tts-configcenter-ui</feature>
+    </feature>
+    
+    <feature name="tts-configcenter-persistence" version="${pom.version}">
+        <feature>pax-jdbc-h2</feature>
+        <feature>pax-jdbc-config</feature>
+        <feature>pax-jdbc-pool-dbcp2</feature>
+        <feature>jndi</feature>
+        <feature>transaction</feature>
+        <feature version="[2.2, 3)">jpa</feature>
+        <feature version="[4.3, 5)">hibernate</feature>
+        <bundle>mvn:${groupId}/model/${pom.version}</bundle>
+        <bundle>mvn:${groupId}/persistence/${pom.version}</bundle>
+    </feature>
+
+    <feature name="tts-configcenter-service" version="${pom.version}">
+        <feature>cxf-features-logging</feature>
+        <feature>cxf-jaxrs</feature>
+        <feature>cxf-commands</feature>
+        <bundle>mvn:${groupId}/model/${pom.version}</bundle>
+        <bundle>mvn:${groupId}/service/${pom.version}</bundle>
+        <bundle>mvn:${groupId}/rest/${pom.version}</bundle>
+    </feature>
+
+    <feature name="tts-configcenter-ui" version="${pom.version}">
+        <feature>war</feature>
+        <bundle>mvn:${groupId}/webui/${pom.version}</bundle>
+    </feature>
+</features>
