@@ -6,9 +6,13 @@ import javax.jws.WebService;
 
 @WebService
 public interface TaskService {
-	Task getTask(Integer id);
-	void addTask(Task task);
-	void updateTask(Task task);
-	void deleteTask(Integer id);
-	Collection<Task> getTasks();
+    void add(Task task);
+
+    void update(Task task);
+
+    void delete(Integer id);
+
+    Task find(Integer i);
+
+    Collection<Task> find();
 }

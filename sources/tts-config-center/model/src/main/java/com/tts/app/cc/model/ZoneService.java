@@ -3,13 +3,13 @@ package com.tts.app.cc.model;
 import java.util.Collection;
 
 public interface ZoneService {
-    void addZone(Zone zone);
+    void add(Zone zone);
 
-    void updateZone(Zone zone);
+    void update(Zone zone);
 
-    void deleteZone(Integer id);
+    void delete(Integer id);
 
-    Zone getZone(int id);
+    Zone find(int id);
 
-    Collection<Zone> getZones();
+    Collection<Zone> find();
 }

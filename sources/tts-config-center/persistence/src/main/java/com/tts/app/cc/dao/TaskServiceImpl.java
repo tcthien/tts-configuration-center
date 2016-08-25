@@ -1,5 +1,6 @@
 package com.tts.app.cc.dao;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.inject.Named;
@@ -28,13 +29,7 @@ public class TaskServiceImpl implements TaskService {
     EntityManager em;
 
     @Override
-    @Transactional(Transactional.TxType.SUPPORTS)
-    public Task getTask(Integer id) {
-        return em.find(Task.class, id);
-    }
-
-    @Override
-    public void addTask(Task task) {
+    public void add(Task task) {
         em.persist(task);
         em.flush();
     }
@@ -46,13 +41,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void updateTask(Task task) {
+    public void update(Task task) {
         em.merge(task);
     }
     
     @Override
-    public void deleteTask(Integer id) {
-        em.remove(getTask(id));
+    public void delete(Integer id) {
+        em.remove(find(id));
     }
 
+    @Override
+    @Transactional(Transactional.TxType.SUPPORTS)
+    public Task find(Integer id) {
+        return em.find(Task.class, id);
+    }
+
+    @Override
+    public Collection<Task> find() {
+        return Arrays.asList((Task)find(null));
+    }
 }

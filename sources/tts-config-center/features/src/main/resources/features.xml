@@ -25,6 +25,7 @@
         <feature>cxf-features-logging</feature>
         <feature>cxf-jaxrs</feature>
         <feature>cxf-commands</feature>
+        <bundle>mvn:${groupId}/ssh/${pom.version}</bundle>
         <bundle>mvn:${groupId}/model/${pom.version}</bundle>
         <bundle>mvn:${groupId}/service/${pom.version}</bundle>
         <bundle>mvn:${groupId}/rest/${pom.version}</bundle>

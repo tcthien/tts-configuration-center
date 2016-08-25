@@ -20,8 +20,8 @@ import javax.ws.rs.core.UriInfo;
 
 import org.ops4j.pax.cdi.api.OsgiService;
 
+import com.tts.app.cc.model.TTSConfigCenterService;
 import com.tts.app.cc.model.Zone;
-import com.tts.app.cc.model.ZoneService;
 
 @Path("/zone")
 @Named
@@ -31,41 +31,41 @@ public class ZoneServiceRest {
 
     @OsgiService
     @Inject
-    ZoneService zoneService;
+    TTSConfigCenterService configService;
 
     @Context
     UriInfo uri;
-
-    @GET
-    @Path("{id}")
-    public Response getZone(@PathParam("id") Integer id) {
-        Zone zone = zoneService.getZone(id);
-        return zone == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(zone).build();
-    }
-
+    
     @POST
-    public Response addZone(Zone zone) {
-        zoneService.addZone(zone);
+    public Response add(Zone zone) {
+        configService.addZone(zone);
         URI zoneURI = uri.getRequestUriBuilder().path(ZoneServiceRest.class, "getZone").build(zone.getId());
         return Response.created(zoneURI).build();
     }
 
     @GET
+    @Path("{id}")
+    public Response get(@PathParam("id") Integer id) {
+        Zone zone = configService.findZone(id);
+        return zone == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(zone).build();
+    }
+
+    @GET
     public Collection<Zone> getZones() {
-        return zoneService.getZones();
+        return configService.findAllZones();
     }
 
     @PUT
     @Path("{id}")
-    public void updateZone(@PathParam("id") Integer id, Zone zone) {
+    public void update(@PathParam("id") Integer id, Zone zone) {
         zone.setId(id);
-        zoneService.updateZone(zone);
+        throw new RuntimeException("Not yet implemented!");
     }
 
     @DELETE
     @Path("{id}")
-    public void deleteZone(@PathParam("id") Integer id) {
-        zoneService.deleteZone(id);
+    public void delete(@PathParam("id") Integer id) {
+        throw new RuntimeException("Not yet implemented!");
     }
 
 }

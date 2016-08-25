@@ -1,7 +1,7 @@
 package com.tts.app.cc.service;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.inject.Named;
@@ -22,32 +22,32 @@ import com.tts.app.cc.model.ZoneService;
 public class ZoneServiceImpl implements ZoneService {
     
     int id = 1;
-    Map<Integer, Zone> zones = new HashMap<Integer, Zone>();
+    Map<Integer, Zone> zones = new LinkedHashMap<Integer, Zone>();
 
     @Override
-    public void addZone(Zone zone) {
+    public void add(Zone zone) {
         zone.setId(id);
         zones.put(id, zone);
         id++;
     }
 
     @Override
-    public void updateZone(Zone zone) {
+    public void update(Zone zone) {
         zones.put(zone.getId(), zone);
     }
 
     @Override
-    public void deleteZone(Integer id) {
+    public void delete(Integer id) {
         zones.remove(id);
     }
 
     @Override
-    public Zone getZone(int id) {
+    public Zone find(int id) {
         return zones.get(id);
     }
 
     @Override
-    public Collection<Zone> getZones() {
+    public Collection<Zone> find() {
         return zones.values();
     }
     

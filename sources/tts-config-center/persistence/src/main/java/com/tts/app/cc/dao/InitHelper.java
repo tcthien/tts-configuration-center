@@ -24,7 +24,7 @@ public class InitHelper {
             @Override
             public void run() {
                 try {
-                    if (taskService.getTask(1) == null) {
+                    if (taskService.find(1) == null) {
                         addSampleTask();
                     }
                 } catch (Exception e) {
@@ -37,7 +37,7 @@ public class InitHelper {
 
     private void addSampleTask() {
         Task task = new Task(1, "Just a sample task", "Some more info");
-        taskService.addTask(task);
+        taskService.add(task);
     }
 
 }

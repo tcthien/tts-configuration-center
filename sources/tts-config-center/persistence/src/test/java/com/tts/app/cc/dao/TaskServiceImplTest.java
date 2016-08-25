@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.tts.app.cc.dao.TaskServiceImpl;
 import com.tts.app.cc.model.Task;
 
 public class TaskServiceImplTest {
@@ -25,7 +24,7 @@ public class TaskServiceImplTest {
         Task task = new Task();
         task.setId(1);
         task.setTitle("Test task");
-        taskService.addTask(task);
+        taskService.add(task);
         em.getTransaction().commit();
         Collection<Task> persons = taskService.getTasks();
 

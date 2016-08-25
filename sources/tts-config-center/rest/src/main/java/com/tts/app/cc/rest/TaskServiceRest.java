@@ -38,34 +38,34 @@ public class TaskServiceRest {
 
     @GET
     @Path("{id}")
-    public Response getTask(@PathParam("id") Integer id) {
-        Task task = taskService.getTask(id);
+    public Response get(@PathParam("id") Integer id) {
+        Task task = taskService.find(id);
         return task == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(task).build();
     }
 
     @POST
-    public Response addTask(Task task) {
-        taskService.addTask(task);
+    public Response add(Task task) {
+        taskService.add(task);
         URI taskURI = uri.getRequestUriBuilder().path(TaskServiceRest.class, "getTask").build(task.getId());
         return Response.created(taskURI).build();
     }
 
     @GET
     public Collection<Task> getTasks() {
-        return taskService.getTasks();
+        return taskService.find();
     }
 
     @PUT
     @Path("{id}")
-    public void updateTask(@PathParam("id") Integer id, Task task) {
+    public void update(@PathParam("id") Integer id, Task task) {
         task.setId(id);
-        taskService.updateTask(task);
+        taskService.update(task);
     }
 
     @DELETE
     @Path("{id}")
-    public void deleteTask(@PathParam("id") Integer id) {
-        taskService.deleteTask(id);
+    public void delete(@PathParam("id") Integer id) {
+        taskService.delete(id);
     }
 
 }
