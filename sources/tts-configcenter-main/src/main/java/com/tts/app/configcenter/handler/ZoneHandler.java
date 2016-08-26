@@ -1,6 +1,6 @@
 package com.tts.app.configcenter.handler;
 
-import com.tts.app.configcenter.Zone;
+import com.tts.app.configcenter.model.Zone;
 
 public class ZoneHandler extends GenericHandler<Zone> {
 

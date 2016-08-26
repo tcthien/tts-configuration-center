@@ -42,8 +42,6 @@
         </cxf:providers>
     </cxf:rsServer>
 
-    <bean id="sampleHandler" class="com.tts.app.configcenter.handler.SampleHandler" init-method="init" />
-    
     <bean id="serviceInvoker" class="com.tts.app.configcenter.handler.ServiceInvokerImpl" init-method="init" />
      <!-- Handler declaration -->
     <bean id="zoneHandler" class="com.tts.app.configcenter.handler.ZoneHandler" />

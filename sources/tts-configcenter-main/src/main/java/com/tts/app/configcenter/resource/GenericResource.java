@@ -26,8 +26,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.tts.app.configcenter.Server;
-import com.tts.app.configcenter.Zone;
+import com.tts.app.configcenter.model.Server;
+import com.tts.app.configcenter.model.Zone;
 
 // This could be an interface if CAMEL-6014 is fixed.
 

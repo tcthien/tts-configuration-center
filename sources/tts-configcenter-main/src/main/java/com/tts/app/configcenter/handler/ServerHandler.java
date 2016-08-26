@@ -1,6 +1,6 @@
 package com.tts.app.configcenter.handler;
 
-import com.tts.app.configcenter.Server;
+import com.tts.app.configcenter.model.Server;
 
 public class ServerHandler extends GenericHandler<Server> {
 
