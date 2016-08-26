@@ -24,16 +24,7 @@
             <cm:property name="service" value="rest" />
         </cm:default-properties>
     </cm:property-placeholder>
-
-    <cxf:rsServer id="rsServer" address="${CXFserver}${service}" serviceClass="com.example.test.cxf.routes.PersonService"
-        loggingFeatureEnabled="true" loggingSizeLimit="20">
-        <cxf:providers>
-            <ref component-id="jsonProvider" />
-        </cxf:providers>
-    </cxf:rsServer>
-
-    <bean id="serviceHandler" class="com.example.test.cxf.routes.ServiceHandler" init-method="init" />
-
+    
     <!-- 
     <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
         <property name="serializationConfig.dateFormat">
@@ -44,42 +35,50 @@
     </bean> -->
     <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 
+    <cxf:rsServer id="rsServer" address="${CXFserver}${service}" serviceClass="com.tts.app.configcenter.resource.GenericResource"
+        loggingFeatureEnabled="true" loggingSizeLimit="200">
+        <cxf:providers>
+            <ref component-id="jsonProvider" />
+        </cxf:providers>
+    </cxf:rsServer>
+
+    <bean id="sampleHandler" class="com.tts.app.configcenter.handler.SampleHandler" init-method="init" />
+    
+    <bean id="serviceInvoker" class="com.tts.app.configcenter.handler.ServiceInvokerImpl" init-method="init" />
+     <!-- Handler declaration -->
+    <bean id="zoneHandler" class="com.tts.app.configcenter.handler.ZoneHandler" />
+    <bean id="serverHandler" class="com.tts.app.configcenter.handler.ServerHandler" />
+    
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-        <route id="PersonServiceRoute">
+        <route id="GenericServiceRoute">
             <from uri="cxfrs:bean:rsServer?bindingStyle=SimpleConsumer" />
-            <log message="Interceptor: ${header.operationName} - ${header.id}" />
+            <log message="INTERCEPTOR: ${header.resource} - ${header.operationName} - ${header.id}" />
             <recipientList>
                 <simple>direct-vm:${header.operationName}</simple>
             </recipientList>
         </route>
-        <route id="getZone">
-            <from uri="direct-vm:getZone" />
-            <transform>
-                <simple>${header.id}</simple>
-            </transform>
-            <log message="getZone invocation with id: ${body}" />
-            <bean method="getZone" ref="serviceHandler" />
+        <!-- Routing for getProcessor -->
+        <route id="getProcessor">
+            <from uri="direct-vm:get" />
+            <log message="--- INVOKING ${header.resource}.${header.operationName}(${header.id})" />
+            <to uri="bean:serviceInvoker?method=invoke(${header.resource}, ${header.operationName}, ${header.id})" />
         </route>
-        <route id="getPerson">
-            <from uri="direct-vm:getPerson" />
-            <transform>
-                <simple>${header.id}</simple>
-            </transform>
-            <log message="getPerson invocation with id: ${body}" />
-            <bean method="getPerson" ref="serviceHandler" />
+        <!-- Routing for putResource -->
+        <route id="updateZoneProcessor">
+            <from uri="direct-vm:updateZone" />
+            <log message="--- INVOKING ${header.resource}.${header.operationName}(${body})" />
+            <to uri="bean:serviceInvoker?method=invoke('zone', 'update', ${body})" />
         </route>
-        <route id="putPerson">
-            <from uri="direct-vm:putPerson" />
-            <log message="putPerson invocation with body: ${body}" />
-            <bean method="putPerson" ref="serviceHandler" />
+        <route id="updateServerProcessor">
+            <from uri="direct-vm:updateServer" />
+            <log message="--- INVOKING ${header.resource}.${header.operationName}(${body})" />
+            <to uri="bean:serviceInvoker?method=invoke('server', 'update', ${body})" />
         </route>
-        <route id="deletePerson">
-            <from uri="direct-vm:deletePerson" />
-            <transform>
-                <simple>${header.id}</simple>
-            </transform>
-            <log message="deletePerson invocation with id: ${body}" />
-            <bean method="deletePerson" ref="serviceHandler" />
+        <!-- Routing for getProcessor -->
+        <route id="deleteProcessor">
+            <from uri="direct-vm:deleteProcessor" />
+            <log message="--- INVOKING ${header.resource}.${header.operationName}(${header.id})" />
+            <to uri="bean:serviceInvoker?method=invoke(${header.resource}, ${header.operationName}, ${header.id})" />
         </route>
     </camelContext>
 </blueprint>

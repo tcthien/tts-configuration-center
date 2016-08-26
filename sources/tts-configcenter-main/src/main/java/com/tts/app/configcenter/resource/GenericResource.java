@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.example.test.cxf.routes;
+package com.tts.app.configcenter.resource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,35 +25,31 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
+import com.tts.app.configcenter.Server;
+import com.tts.app.configcenter.Zone;
 
 // This could be an interface if CAMEL-6014 is fixed.
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM })
-public class PersonService {
-
-    @GET
-    @Path("/zone/get/{id}/")
-    public Person getZone(@PathParam("id") String id) {
-        return null;
-    }
+@Consumes(MediaType.APPLICATION_JSON)
+public interface GenericResource {
     
     @GET
-    @Path("/person/get/{id}/")
-    public Person getPerson(@PathParam("id") String id) {
-        return null;
-    }
+    @Path("/{resource}/{id}/")
+    public <T> T get(@PathParam("resource") String resource, @PathParam("id") String id);
+    
+    @DELETE
+    @Path("/{resource}/{id}/")
+    public <T> T delete(@PathParam("resource") String resource, @PathParam("id") String id);
 
     @POST
-    @Path("/person/post")
-    public Response putPerson(Person person) {
-        return null;
-    }
-
-    @DELETE
-    @Path("/person/delete/{id}")
-    public void deletePerson(@PathParam("id") String id) {
-    }
+    @Path("/zone")
+    public Zone updateZone(Zone zone);
+    
+    @POST
+    @Path("/server")
+    public Server updateServer(Server server);
+    
 }

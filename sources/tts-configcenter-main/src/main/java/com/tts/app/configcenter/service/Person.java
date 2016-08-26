@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.example.test.cxf.routes;
+package com.tts.app.configcenter.service;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

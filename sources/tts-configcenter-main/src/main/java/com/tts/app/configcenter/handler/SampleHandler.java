@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.example.test.cxf.routes;
+package com.tts.app.configcenter.handler;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -27,8 +27,9 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import com.tts.app.configcenter.Zone;
+import com.tts.app.configcenter.service.Person;
 
-public class ServiceHandler {
+public class SampleHandler {
 
     private Map<Integer, Person> persons = new HashMap<Integer, Person>();
     private Map<Integer, Zone> zones = new HashMap<Integer, Zone>();
