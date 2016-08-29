@@ -22,8 +22,6 @@ import org.ops4j.pax.cdi.api.OsgiService;
 
 import com.tts.app.configcenter.model.Task;
 import com.tts.app.configcenter.model.TaskService;
-import com.tts.app.configcenter.model.zone.Zone;
-import com.tts.app.configcenter.model.zone.ZoneDao;
 
 @Named
 @Consumes({"application/json", "test/xml"})
@@ -33,28 +31,17 @@ public class TaskServiceRest {
     @OsgiService @Inject
     TaskService taskService;
     
-    @OsgiService @Inject
-    ZoneDao zoneDao;
-    
     @Context
     UriInfo uri;
     
     @GET
-    @Path("/zone/{id}")
-    public Response getZone(@PathParam("id") Integer id) {
-        Zone zone = zoneDao.get(id);
-        return zone == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(zone).build();
-    }
-
-    @GET
-    @Path("/task/{id}")
+    @Path("/{id}")
     public Response getTask(@PathParam("id") Integer id) {
         Task task = taskService.getTask(id);
         return task == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(task).build();
     }
 
     @POST
-    @Path("/task")
     public Response addTask(Task task) {
         taskService.addTask(task);
         URI taskURI = uri.getRequestUriBuilder().path(TaskServiceRest.class, "getTask").build(task.getId());
@@ -62,20 +49,19 @@ public class TaskServiceRest {
     }
 
     @GET
-    @Path("/task")
     public Collection<Task> getTasks() {
         return taskService.getTasks();
     }
 
     @PUT
-    @Path("/task/{id}")
+    @Path("/{id}")
     public void updateTask(@PathParam("id") Integer id, Task task) {
         task.setId(id);
         taskService.updateTask(task);
     }
     
     @DELETE
-    @Path("/task/{id}")
+    @Path("/{id}")
     public void deleteTask(@PathParam("id") Integer id) {
         taskService.deleteTask(id);
     }

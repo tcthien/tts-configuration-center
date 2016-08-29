@@ -13,10 +13,10 @@
         "
     >
 
-    <cxf:bus id="taskServiceRest">
+    <cxf:bus id="configCenterBus">
     </cxf:bus>
-
-    <jaxrs:server address="/" id="personService">
+     
+    <jaxrs:server address="/task/" id="personService">
         <jaxrs:serviceBeans>
             <ref component-id="taskServiceRest" />
         </jaxrs:serviceBeans>
@@ -24,6 +24,15 @@
             <cxf:logging />
         </jaxrs:features>
     </jaxrs:server>
-
+    
+    <jaxrs:server address="/zone/" id="zoneService">
+        <jaxrs:serviceBeans>
+            <ref component-id="zoneServiceRest" />
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+    </jaxrs:server>
+    
 </blueprint>
 
