@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.impl;
+package com.tts.app.configcenter.service.resource;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 
 import com.tts.lib.model.generic.DataModel;
 
-public interface GenericResource<T extends DataModel> {
+public interface PersistenceResource<T extends DataModel> {
 
     Response getObject(Integer id);
 

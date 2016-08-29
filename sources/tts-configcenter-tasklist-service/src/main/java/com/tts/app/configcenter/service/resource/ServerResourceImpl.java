@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.impl;
+package com.tts.app.configcenter.service.resource;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +13,7 @@ import com.tts.app.configcenter.model.server.ServerDao;
 @Named
 @Consumes({"application/json", "test/xml"})
 @Produces({"application/json", "test/xml"})
-public class ServerResourceImpl extends GenericResourceImpl<Server, ServerDao> {
+public class ServerResourceImpl extends PersistenceResourceImpl<Server, ServerDao> {
     
     @OsgiService @Inject
     ServerDao serverDao;

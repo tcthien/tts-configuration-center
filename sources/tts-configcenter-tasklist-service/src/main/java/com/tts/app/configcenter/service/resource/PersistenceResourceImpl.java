@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.impl;
+package com.tts.app.configcenter.service.resource;
 
 import java.net.URI;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import javax.ws.rs.core.UriInfo;
 import com.tts.lib.model.generic.DataModel;
 import com.tts.lib.model.generic.GenericDao;
 
-public abstract class GenericResourceImpl<T extends DataModel, DAO extends GenericDao<T>> implements GenericResource<T> {
+public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends GenericDao<T>> implements PersistenceResource<T> {
 
     public abstract DAO getDao();
     

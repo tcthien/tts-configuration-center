@@ -38,5 +38,14 @@
         </jaxrs:features>
     </jaxrs:server>
 
+    <jaxrs:server address="/ssh/" id="SSHService">
+        <jaxrs:serviceBeans>
+            <ref component-id="sshResourceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+    </jaxrs:server>
+
 </blueprint>
 

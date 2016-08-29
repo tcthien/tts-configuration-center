@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.impl;
+package com.tts.app.configcenter.service.resource;
 
 import java.net.URI;
 import java.util.Collection;
