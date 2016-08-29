@@ -26,7 +26,7 @@ import com.tts.app.configcenter.model.TaskService;
 @Named
 @Consumes({"application/json", "test/xml"})
 @Produces({"application/json", "test/xml"})
-public class TaskServiceRest {
+public class TaskResourceImpl {
     
     @OsgiService @Inject
     TaskService taskService;
@@ -44,7 +44,7 @@ public class TaskServiceRest {
     @POST
     public Response addTask(Task task) {
         taskService.addTask(task);
-        URI taskURI = uri.getRequestUriBuilder().path(TaskServiceRest.class, "getTask").build(task.getId());
+        URI taskURI = uri.getRequestUriBuilder().path(TaskResourceImpl.class, "getTask").build(task.getId());
         return Response.created(taskURI).build();
     }
 
