@@ -6,17 +6,12 @@
     <parent>
         <groupId>com.tts.app.configcenter</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <artifactId>parent</artifactId>
+        <artifactId>tts-configcenter-parent</artifactId>
         <relativePath>..</relativePath>
     </parent>
 
     <artifactId>tts-configcenter-features</artifactId>
-    <name>${project.artifactId}</name>
     <packaging>pom</packaging>
-
-    <properties>
-        <feature.jackson.version>${project.parent.jackson.version>}</feature.jackson.version>
-    </properties>
 
     <build>
         <resources>
@@ -26,24 +21,24 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-resources-plugin</artifactId>
-              <version>${maven-resources-plugin.version}</version>
-              <executions>
-                 <execution>
-                    <id>filter</id>
-                    <phase>generate-resources</phase>
-                    <goals>
-                      <goal>resources</goal>
-                    </goals>
-                 </execution>
-              </executions>
-            </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.7</version>
+          <executions>
+             <execution>
+                <id>filter</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>resources</goal>
+                </goals>
+             </execution>
+          </executions>
+        </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${build-helper-maven-plugin.version}</version>
+                <version>1.9.1</version>
                 <executions>
                     <execution>
                         <id>attach-artifacts</id>
@@ -64,4 +59,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
