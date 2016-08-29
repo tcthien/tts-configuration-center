@@ -1,4 +1,4 @@
 Import-Package: \
-    org.hibernate.proxy, \
-    javassist.util.proxy, \
-    *
+	org.hibernate.proxy,\
+	javassist.util.proxy,\
+	*

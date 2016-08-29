@@ -16,7 +16,7 @@
     <cxf:bus id="taskServiceRest">
     </cxf:bus>
 
-    <jaxrs:server address="/tasks" id="personService">
+    <jaxrs:server address="/" id="personService">
         <jaxrs:serviceBeans>
             <ref component-id="taskServiceRest" />
         </jaxrs:serviceBeans>

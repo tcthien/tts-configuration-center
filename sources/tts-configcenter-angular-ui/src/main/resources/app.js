@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('myApp', []);
-    var tasksBase = "/cxf/tasks";
+    var tasksBase = "/cxf/task";
     app.factory("Post", function($resource) {
 	return $resource(tasksBase);
     });

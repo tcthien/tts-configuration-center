@@ -11,12 +11,17 @@ import org.slf4j.LoggerFactory;
 
 import com.tts.app.configcenter.model.Task;
 import com.tts.app.configcenter.model.TaskService;
+import com.tts.app.configcenter.model.zone.Zone;
+import com.tts.app.configcenter.model.zone.ZoneDao;
 
 @Named
 public class InitHelper {
     Logger LOG = LoggerFactory.getLogger(InitHelper.class);
     @Inject
     TaskService taskService;
+
+    @Inject
+    ZoneDao zoneDao;
 
     @PostConstruct
     public void addDemoTasks() {
@@ -27,17 +32,27 @@ public class InitHelper {
                     if (taskService.getTask(1) == null) {
                         addSampleTask();
                     }
+
+                    if (zoneDao.get(1) == null) {
+                        addSampleZone();
+                    }
+
                 } catch (Exception e) {
                     LOG.warn(e.getMessage(), e);
                 }
             }
         });
- 
+
     }
 
     private void addSampleTask() {
         Task task = new Task(1, "Just a sample task", "Some more info");
         taskService.addTask(task);
+    }
+
+    private void addSampleZone() {
+        Zone zone = new Zone(1, "Test Zone");
+        zoneDao.add(zone);
     }
 
 }

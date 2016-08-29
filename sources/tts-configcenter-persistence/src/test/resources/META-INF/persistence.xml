@@ -24,6 +24,8 @@
     <persistence-unit name="configcenter" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.tts.app.configcenter.model.Task</class>
+        <class>com.tts.app.configcenter.model.zone.Zone</class>
+        <class>com.tts.app.configcenter.model.server.Server</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
