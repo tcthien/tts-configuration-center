@@ -11,17 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.tts.app.configcenter.model.zone.Zone;
 import com.tts.lib.model.generic.GenericModel;
 
-@NamedQueries({
-    @NamedQuery(name = Server.GET_SERVERS, 
-        query = "SELECT DISTINCT obj "
-                + "FROM Server obj "
-                + "ORDER BY obj.name"),
-    @NamedQuery(name = Server.GET_SERVER_BY_ID, 
-        query = "SELECT DISTINCT obj "
-                + "FROM Server obj "
-                + "WHERE obj.id=:serverId "
-                + "ORDER BY obj.name"),
-})
 @Entity(name = "Server")
 @Table(name = "Server")
 @XmlType
