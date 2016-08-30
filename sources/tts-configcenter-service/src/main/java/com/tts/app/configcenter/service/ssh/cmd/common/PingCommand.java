@@ -1,8 +1,9 @@
-package com.tts.app.configcenter.service.ssh.cmd;
+package com.tts.app.configcenter.service.ssh.cmd.common;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
+import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
 
 public class PingCommand extends SimpleCommand {
     

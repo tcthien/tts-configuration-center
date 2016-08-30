@@ -13,7 +13,7 @@ import org.ops4j.pax.cdi.api.OsgiService;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
-import com.tts.app.configcenter.service.ssh.cmd.PingCommand;
+import com.tts.app.configcenter.service.ssh.cmd.common.PingCommand;
 import com.tts.app.configcenter.service.ssh.feature.CmdFeature;
 import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
 import com.tts.app.configcenter.service.ssh.feature.DockerFeature;

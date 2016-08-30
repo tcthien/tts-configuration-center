@@ -89,7 +89,9 @@ public class SSHCommandExecutorImpl implements SSHCommandExecutor {
                     int i = in.read(tmp, 0, 1024);
                     if (i < 0)
                         break;
-                    sb.append(new String(tmp, 0, i));
+                    String out = new String(tmp, 0, i);
+                    System.out.println(out);
+                    sb.append(out);
                 }
                 if (channel.isClosed()) {
                     break;

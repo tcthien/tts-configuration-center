@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHResult;
+import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerComposeCommand;
 
 public class InstallDockerComposeCommandTest extends AbstractCommandTest {
 

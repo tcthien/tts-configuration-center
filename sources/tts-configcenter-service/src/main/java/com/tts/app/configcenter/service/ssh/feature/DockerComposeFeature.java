@@ -4,8 +4,8 @@ import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
-import com.tts.app.configcenter.service.ssh.cmd.InstallDockerComposeCommand;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
+import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerComposeCommand;
 
 public class DockerComposeFeature extends AbstractFeature {
 

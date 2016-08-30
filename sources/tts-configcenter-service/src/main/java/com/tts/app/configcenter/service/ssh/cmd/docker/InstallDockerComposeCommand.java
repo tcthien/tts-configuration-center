@@ -1,4 +1,7 @@
-package com.tts.app.configcenter.service.ssh.cmd;
+package com.tts.app.configcenter.service.ssh.cmd.docker;
+
+import com.tts.app.configcenter.service.ssh.cmd.CompositeCommand;
+import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
 
 public class InstallDockerComposeCommand extends CompositeCommand {
 
