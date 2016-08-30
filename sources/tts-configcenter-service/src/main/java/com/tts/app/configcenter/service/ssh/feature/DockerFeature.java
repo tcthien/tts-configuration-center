@@ -1,7 +1,6 @@
 package com.tts.app.configcenter.service.ssh.feature;
 
 import com.tts.app.configcenter.model.server.Server;
-import com.tts.app.configcenter.service.ssh.CmdStatus;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
@@ -39,12 +38,12 @@ public class DockerFeature extends AbstractFeature {
     }
 
     @Override
-    public CmdStatus install(Server server) throws Exception {
+    public SSHResult install(Server server) throws Exception {
         return null;
     }
 
     @Override
-    public CmdStatus uninstall(Server server) throws Exception {
+    public SSHResult uninstall(Server server) throws Exception {
         return null;
     }
 

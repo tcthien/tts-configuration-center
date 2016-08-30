@@ -16,7 +16,7 @@ public interface SSHService {
      */
     Map<CmdFeature, Boolean> checkFeatureStatus(String ipAddress) throws Exception;
 
-    CmdStatus installFeature(String ipAddress, String featureName) throws Exception;
+    SSHResult installFeature(String ipAddress, String featureName) throws Exception;
 
-    CmdStatus uninstallFeature(String ipAddress, String featureName) throws Exception;
+    SSHResult uninstallFeature(String ipAddress, String featureName) throws Exception;
 }

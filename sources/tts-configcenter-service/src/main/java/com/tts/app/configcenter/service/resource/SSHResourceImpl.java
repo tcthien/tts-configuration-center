@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.model.ssh.SSHStatus;
-import com.tts.app.configcenter.service.ssh.CmdStatus;
+import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHService;
 import com.tts.app.configcenter.service.ssh.feature.CmdFeature;
 
@@ -36,11 +36,16 @@ public class SSHResourceImpl extends LogicResourceImpl {
     public Response ping(@PathParam("srcIpAddress") String srcIpAddress, @PathParam("desIpAddress") String desIpAddress) {
         try {
             Boolean status = sshService.ping(srcIpAddress, desIpAddress);
-            SSHStatus pingStatus = status != null ? new SSHStatus(status.toString()) : null;
-            return pingStatus == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(pingStatus).build();
+            SSHStatus pingStatus = convertToSSHStatus(status);
+            return Response.ok(pingStatus).build();
         } catch (Exception e) {
             return Response.status(Status.NOT_FOUND).build();
         }
+    }
+
+    protected SSHStatus convertToSSHStatus(Boolean status) {
+        SSHStatus pingStatus = status != null ? new SSHStatus(status.toString()) : null;
+        return pingStatus;
     }
     
     @GET
@@ -77,20 +82,20 @@ public class SSHResourceImpl extends LogicResourceImpl {
         }
         return rs;
     }
-
-    
     
     @POST
     @Path("/feature/{ipAddress}/{featureName}")
     public Response installFeature(@PathParam("ipAddress") String ipAddress, @PathParam("featureName") String featureName) throws Exception {
-        CmdStatus rs = sshService.installFeature(ipAddress, featureName);
-        return rs == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(rs).build();
+        SSHResult rs = sshService.installFeature(ipAddress, featureName);
+        SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
+        return Response.ok(status).build();
     }
 
     @DELETE
     @Path("/feature/{ipAddress}/{featureName}")
     public Response uninstallFeature(@PathParam("ipAddress") String ipAddress, @PathParam("featureName") String featureName) throws Exception {
-        CmdStatus rs = sshService.installFeature(ipAddress, featureName);
-        return rs == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(rs).build();
+        SSHResult rs = sshService.uninstallFeature(ipAddress, featureName);
+        SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
+        return Response.ok(status).build();
     }
 }

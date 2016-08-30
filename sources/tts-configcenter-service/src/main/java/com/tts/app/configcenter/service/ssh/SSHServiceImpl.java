@@ -66,6 +66,7 @@ public class SSHServiceImpl implements SSHService {
             try {
                 status = feature.check(server);
             } catch (Exception e) {
+                e.printStackTrace();
             }
             rs.put(feature, status);
         }
@@ -73,14 +74,18 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public CmdStatus installFeature(String ipAddress, String featureName) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+    public SSHResult installFeature(String ipAddress, String featureName) throws Exception {
+        Server server = serverDao.findByServerIP(ipAddress);
+        
+        CmdFeature sshFeature = features.get(featureName);
+        return sshFeature.install(server);
     }
 
     @Override
-    public CmdStatus uninstallFeature(String ipAddress, String featureName) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+    public SSHResult uninstallFeature(String ipAddress, String featureName) throws Exception {
+        Server server = serverDao.findByServerIP(ipAddress);
+        
+        CmdFeature sshFeature = features.get(featureName);
+        return sshFeature.uninstall(server);
     }
 }

@@ -19,9 +19,9 @@ public abstract class AbstractCommand implements Command {
     }
 
     protected String buildTextCommand(String cmd) {
-        int idx = cmd.indexOf("sudo");
-        if (idx >= 0 && sudoPass != null) {
-            cmd = cmd.substring(idx + 1).trim();
+        boolean isSudoCmd = cmd.trim().startsWith("sudo");
+        if (isSudoCmd && sudoPass != null) {
+            cmd = cmd.substring(4).trim();
             return "echo " + sudoPass + " | sudo -S " + cmd;
         }
         return cmd;

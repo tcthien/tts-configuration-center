@@ -7,7 +7,11 @@ import com.tts.app.configcenter.service.ssh.SSHResult;
 public class SimpleCommand extends AbstractCommand {
 
     public SimpleCommand(String cmd) {
-        super(cmd);
+        this(cmd, null);
+    }
+    
+    public SimpleCommand(String cmd, String sudoPass) {
+        super(cmd, sudoPass);
     }
 
     @Override
