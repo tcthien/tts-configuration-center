@@ -1,7 +1,6 @@
 package com.tts.app.configcenter.service.ssh.cmd;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
@@ -11,8 +10,14 @@ import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
 
 public class DockerFeatureTest {
 
-    SSHCommandExecutor executor = new SSHCommandExecutorImpl();
-    DockerFeature feature = new DockerFeature(executor);
+    private SSHCommandExecutor executor;
+    private DockerFeature feature;
+    
+    public DockerFeatureTest() {
+        executor = new SSHCommandExecutorImpl();
+        feature = new DockerFeature();
+        feature.setCommandExecutor(executor);
+    }
     
     public void testCheck() throws Exception {
         Server server = createServer();

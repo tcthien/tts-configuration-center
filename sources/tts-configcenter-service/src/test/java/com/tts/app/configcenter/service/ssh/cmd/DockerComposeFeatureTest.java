@@ -1,7 +1,6 @@
 package com.tts.app.configcenter.service.ssh.cmd;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
@@ -13,7 +12,8 @@ public class DockerComposeFeatureTest {
     SSHCommandExecutor executor = new SSHCommandExecutorImpl();
     
     public void testCheck() throws Exception {
-        DockerComposeFeature f = new DockerComposeFeature(executor);
+        DockerComposeFeature f = new DockerComposeFeature();
+        f.setCommandExecutor(executor);
         Server server = new Server();
         server.setIpAddress("192.168.100.100");
         server.setUserName("tcthien");

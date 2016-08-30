@@ -1,6 +1,6 @@
 package com.tts.app.configcenter.service.ssh.cmd;
 
-import org.junit.Test;
+import org.junit.Assert;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHResult;
@@ -8,7 +8,6 @@ import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerComposeComma
 
 public class InstallDockerComposeCommandTest extends AbstractCommandTest {
 
-    @Test
     public void testExecute() throws Exception {
         InstallDockerComposeCommand cmd = new InstallDockerComposeCommand("tcthien");
         // SSH to server 192.168.100.100
@@ -18,5 +17,6 @@ public class InstallDockerComposeCommandTest extends AbstractCommandTest {
         server.setPassword("tcthien");
         
         SSHResult rs = cmd.execute(executor, server);
+        Assert.assertEquals(SSHResult.STATUS_OK, rs.getExistStatus());
     }
 }

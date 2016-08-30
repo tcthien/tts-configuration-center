@@ -1,36 +1,20 @@
 package com.tts.app.configcenter.service.ssh.feature;
 
+import javax.inject.Named;
+
 import com.tts.app.configcenter.model.server.Server;
-import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
+import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
 import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerCommand;
 
-public class DockerFeature extends AbstractFeature {
-
-    public DockerFeature(SSHCommandExecutor executor) {
-        super(executor);
-    }
+@Named
+public class DockerFeature extends BasicFeature {
 
     @Override
-    public String getName() {
-        return "Docker";
-    }
-    
-    @Override
-    public String getOSName() {
-        return "ubuntu";
-    }
-
-    @Override
-    public String getOSVersion() {
-        return "all";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Feature to support docker command";
+    public SSHFeature getFeatureInfo() {
+        return SSHFeature.create().name("Docker").osName("ubuntu").osVersion("all").description("Feature to support docker command");
     }
 
     @Override

@@ -1,24 +1,31 @@
 package com.tts.app.configcenter.service.ssh;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.ops4j.pax.cdi.api.OsgiService;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
+import org.ops4j.pax.cdi.api.Properties;
+import org.ops4j.pax.cdi.api.Property;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
+import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.service.ssh.cmd.common.PingCommand;
-import com.tts.app.configcenter.service.ssh.feature.CmdFeature;
-import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
-import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
+import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
 
-@Named(value = "sshServiceImpl")
+
+@OsgiServiceProvider(classes = {SSHService.class})
+//The properties below allow to transparently export the service as a web service using Distributed OSGi
+@Properties({
+@Property(name = "service.exported.interfaces", value = "*")
+})
+@Named
 public class SSHServiceImpl implements SSHService {
     
     @OsgiService @Inject
@@ -28,25 +35,16 @@ public class SSHServiceImpl implements SSHService {
     SSHCommandExecutor commandExecutor;
     
     
-    List<CmdFeature> supportedFeatures; 
-    
-    Map<String, CmdFeature> features = new LinkedHashMap<>();
-
-    @PostConstruct
-    public void init() {
-        CmdFeature docker = (CmdFeature) new DockerFeature(commandExecutor);
-        CmdFeature dockerCompose = (CmdFeature) new DockerComposeFeature(commandExecutor);
-        supportedFeatures = Arrays.asList(docker, dockerCompose);
-        
-        List<CmdFeature> cmds = getSupportedFeatures();
-        for (CmdFeature cmd : cmds) {
-            features.put(cmd.getName(), cmd);
-        }
-    }
+    Map<SSHFeature, SoftwareFeature> features = new LinkedHashMap<>();
     
     @Override
-    public List<CmdFeature> getSupportedFeatures() {
-        return supportedFeatures;
+    public void addFeature(SoftwareFeature feature) {
+        features.put(feature.getFeatureInfo(), feature);
+    }
+
+    @Override
+    public List<SoftwareFeature> getSupportedFeatures() {
+        return new ArrayList<>(features.values());
     }
 
     @Override
@@ -57,11 +55,11 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public Map<CmdFeature, Boolean> checkFeatureStatus(String ipAddress) throws Exception {
+    public Map<SoftwareFeature, Boolean> checkFeatureStatus(String ipAddress) throws Exception {
         Server server = serverDao.findByServerIP(ipAddress);
         
-        Map<CmdFeature, Boolean> rs = new LinkedHashMap<>();
-        for (CmdFeature feature : supportedFeatures) {
+        Map<SoftwareFeature, Boolean> rs = new LinkedHashMap<>();
+        for (SoftwareFeature feature : features.values()) {
             boolean status = false;
             try {
                 status = feature.check(server);
@@ -74,18 +72,18 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public SSHResult installFeature(String ipAddress, String featureName) throws Exception {
+    public SSHResult installFeature(String ipAddress, SSHFeature feature) throws Exception {
         Server server = serverDao.findByServerIP(ipAddress);
         
-        CmdFeature sshFeature = features.get(featureName);
+        SoftwareFeature sshFeature = features.get(feature);
         return sshFeature.install(server);
     }
 
     @Override
-    public SSHResult uninstallFeature(String ipAddress, String featureName) throws Exception {
+    public SSHResult uninstallFeature(String ipAddress, SSHFeature feature) throws Exception {
         Server server = serverDao.findByServerIP(ipAddress);
         
-        CmdFeature sshFeature = features.get(featureName);
+        SoftwareFeature sshFeature = features.get(feature);
         return sshFeature.uninstall(server);
     }
 }

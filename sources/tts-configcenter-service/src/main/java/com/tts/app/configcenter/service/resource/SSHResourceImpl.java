@@ -21,7 +21,7 @@ import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.model.ssh.SSHStatus;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHService;
-import com.tts.app.configcenter.service.ssh.feature.CmdFeature;
+import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
 
 @Named(value = "sshResourceImpl")
 @Consumes({ "application/json", "test/xml" })
@@ -53,30 +53,21 @@ public class SSHResourceImpl extends LogicResourceImpl {
     public List<SSHFeature> getSupportedFeature() {
         List<SSHFeature> rs = new ArrayList<>();
         
-        List<CmdFeature> features = sshService.getSupportedFeatures();
-        for (CmdFeature feature : features) {
-            rs.add(convertToSSHFeature(feature));
+        List<SoftwareFeature> features = sshService.getSupportedFeatures();
+        for (SoftwareFeature feature : features) {
+            rs.add(feature.getFeatureInfo());
         }
         return rs;
     }
 
-    protected SSHFeature convertToSSHFeature(CmdFeature feature) {
-        SSHFeature tmp = new SSHFeature();
-        tmp.setName(feature.getName());
-        tmp.setDescription(feature.getDescription());
-        tmp.setOsName(feature.getOSName());
-        tmp.setOsVersion(feature.getOSVersion());
-        return tmp;
-    }
-    
     @GET
     @Path("/check/{ipAddress}")
     public List<SSHFeature> checkFeatureStatus(@PathParam("ipAddress") String ipAddress) throws Exception {
         List<SSHFeature> rs = new ArrayList<>();
         
-        Map<CmdFeature, Boolean> status = sshService.checkFeatureStatus(ipAddress);
-        for (Entry<CmdFeature, Boolean> entry : status.entrySet()) {
-            SSHFeature sshFeature = convertToSSHFeature(entry.getKey());
+        Map<SoftwareFeature, Boolean> status = sshService.checkFeatureStatus(ipAddress);
+        for (Entry<SoftwareFeature, Boolean> entry : status.entrySet()) {
+            SSHFeature sshFeature = entry.getKey().getFeatureInfo();
             sshFeature.setStatus(entry.getValue());
             rs.add(sshFeature);
         }
@@ -84,17 +75,17 @@ public class SSHResourceImpl extends LogicResourceImpl {
     }
     
     @POST
-    @Path("/feature/{ipAddress}/{featureName}")
-    public Response installFeature(@PathParam("ipAddress") String ipAddress, @PathParam("featureName") String featureName) throws Exception {
-        SSHResult rs = sshService.installFeature(ipAddress, featureName);
+    @Path("/feature/{ipAddress}")
+    public Response installFeature(@PathParam("ipAddress") String ipAddress, SSHFeature feature) throws Exception {
+        SSHResult rs = sshService.installFeature(ipAddress, feature);
         SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
         return Response.ok(status).build();
     }
 
     @DELETE
-    @Path("/feature/{ipAddress}/{featureName}")
-    public Response uninstallFeature(@PathParam("ipAddress") String ipAddress, @PathParam("featureName") String featureName) throws Exception {
-        SSHResult rs = sshService.uninstallFeature(ipAddress, featureName);
+    @Path("/feature/{ipAddress}")
+    public Response uninstallFeature(@PathParam("ipAddress") String ipAddress, SSHFeature feature) throws Exception {
+        SSHResult rs = sshService.uninstallFeature(ipAddress, feature);
         SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
         return Response.ok(status).build();
     }

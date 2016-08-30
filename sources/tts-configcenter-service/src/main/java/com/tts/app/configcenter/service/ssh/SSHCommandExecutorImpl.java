@@ -8,6 +8,10 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
+import org.ops4j.pax.cdi.api.Properties;
+import org.ops4j.pax.cdi.api.Property;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -16,6 +20,11 @@ import com.jcraft.jsch.Session;
 import com.tts.app.configcenter.service.ssh.cmd.Command;
 import com.tts.app.configcenter.service.ssh.cmd.CompositeCommand;
 
+@OsgiServiceProvider(classes = {SSHCommandExecutor.class})
+//The properties below allow to transparently export the service as a web service using Distributed OSGi
+@Properties({
+@Property(name = "service.exported.interfaces", value = "*")
+})
 @Named
 public class SSHCommandExecutorImpl implements SSHCommandExecutor {
     
