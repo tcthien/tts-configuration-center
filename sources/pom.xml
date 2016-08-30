@@ -20,7 +20,7 @@
         <module>tts-configcenter-persistence</module>
         <module>tts-configcenter-ui</module>
         <module>tts-configcenter-features</module>
-        <module>tts-configcenter-tasklist-service</module>
+        <module>tts-configcenter-service</module>
         <module>tts-configcenter-angular-ui</module>
   </modules>
 
