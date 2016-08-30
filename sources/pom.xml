@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <properties>
+        <user.repoDir>/home/tcthien/.m2/repository</user.repoDir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cxf.version>3.1.1</cxf.version>
         <scanPath>com.tts</scanPath>

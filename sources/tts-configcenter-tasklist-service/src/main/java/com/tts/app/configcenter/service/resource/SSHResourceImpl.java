@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tts.app.configcenter.model.ssh.SSHStatus;
 import com.tts.app.configcenter.service.ssh.CmdStatus;
 import com.tts.app.configcenter.service.ssh.SSHService;
 
@@ -26,10 +27,15 @@ public class SSHResourceImpl extends LogicResourceImpl {
     SSHService sshService;
 
     @GET
-    @Path("/ping/{ipAddress}")
-    public Response ping(@PathParam("ipAddress") String ipAddress) {
-        Boolean status = sshService.ping(ipAddress);
-        return status == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(status).build();
+    @Path("/ping/{srcIpAddress}/{desIpAddress}")
+    public Response ping(@PathParam("srcIpAddress") String srcIpAddress, @PathParam("desIpAddress") String desIpAddress) {
+        try {
+            Boolean status = sshService.ping(srcIpAddress, desIpAddress);
+            SSHStatus pingStatus = status != null ? new SSHStatus(status.toString()) : null;
+            return pingStatus == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(pingStatus).build();
+        } catch (Exception e) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
     }
 
     @GET

@@ -6,4 +6,5 @@ import com.tts.lib.model.generic.GenericDao;
 
 @WebService
 public interface ServerDao extends GenericDao<Server> {
+    Server findByServerIP(String ipAddress);
 }

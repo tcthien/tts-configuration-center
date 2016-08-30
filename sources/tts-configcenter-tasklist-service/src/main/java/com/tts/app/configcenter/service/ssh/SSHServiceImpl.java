@@ -6,14 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.ops4j.pax.cdi.api.OsgiService;
+
+import com.tts.app.configcenter.model.server.Server;
+import com.tts.app.configcenter.model.server.ServerDao;
+import com.tts.app.configcenter.service.ssh.cmd.Command;
+import com.tts.app.configcenter.service.ssh.cmd.PingCommand;
 import com.tts.app.configcenter.ssh.feature.CmdFeature;
 import com.tts.app.configcenter.ssh.feature.DockerComposeFeature;
 import com.tts.app.configcenter.ssh.feature.DockerFeature;
 
 @Named(value = "sshServiceImpl")
 public class SSHServiceImpl implements SSHService {
+    
+    @OsgiService @Inject
+    ServerDao serverDao;
+    
+    @Inject
+    SSHCommandExecutor commandExecutor;
+    
     Map<String, CmdFeature> features = new LinkedHashMap<>();
 
     private List<CmdFeature> getSupportedCmdFeatures() {
@@ -33,8 +47,10 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public boolean ping(String ipAddress) {
-        return false;
+    public boolean ping(String srIpAddress, String desIpAddress) throws Exception {
+        Server server = serverDao.findByServerIP(srIpAddress);
+        SSHResult rs = new PingCommand(desIpAddress).execute(commandExecutor, server);
+        return rs.getExistStatus() == SSHResult.PING_REACHABLE;
     }
 
     @Override

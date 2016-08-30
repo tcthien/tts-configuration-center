@@ -3,7 +3,7 @@ package com.tts.app.configcenter.service.ssh;
 import java.util.Map;
 
 public interface SSHService {
-    boolean ping(String ipAddress);
+    boolean ping(String srIpAddress, String desIpAddress) throws Exception;
 
     /**
      * @return <CmdFeature Name, Installed/Uninstalled>
