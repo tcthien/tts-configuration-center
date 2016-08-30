@@ -75,7 +75,6 @@ public class SSHCommandExecutorImpl implements SSHCommandExecutor {
         Channel channel = session.openChannel("exec");
         try {
             ((ChannelExec) channel).setCommand(sshCommand.getTextCommand());
-            System.out.println("Execute Command: " + sshCommand.getTextCommand());
             channel.setInputStream(null);
             ((ChannelExec) channel).setErrStream(System.err);
 
@@ -104,7 +103,7 @@ public class SSHCommandExecutorImpl implements SSHCommandExecutor {
                 } catch (Exception ee) {
                 }
             }
-            
+            System.out.println("Execute Command: " + sshCommand.getTextCommand() + " with result: " + sb.toString());
             sshResult.setExitStatus(channel.getExitStatus());
             sshResult.setOutputText(sb.toString());
         } finally {

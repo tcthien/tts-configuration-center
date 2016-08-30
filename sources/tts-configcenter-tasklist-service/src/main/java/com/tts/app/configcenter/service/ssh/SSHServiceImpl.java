@@ -13,11 +13,10 @@ import org.ops4j.pax.cdi.api.OsgiService;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
-import com.tts.app.configcenter.service.ssh.cmd.Command;
 import com.tts.app.configcenter.service.ssh.cmd.PingCommand;
-import com.tts.app.configcenter.ssh.feature.CmdFeature;
-import com.tts.app.configcenter.ssh.feature.DockerComposeFeature;
-import com.tts.app.configcenter.ssh.feature.DockerFeature;
+import com.tts.app.configcenter.service.ssh.feature.CmdFeature;
+import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
+import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
 
 @Named(value = "sshServiceImpl")
 public class SSHServiceImpl implements SSHService {
@@ -28,22 +27,26 @@ public class SSHServiceImpl implements SSHService {
     @Inject
     SSHCommandExecutor commandExecutor;
     
+    
+    List<CmdFeature> supportedFeatures; 
+    
     Map<String, CmdFeature> features = new LinkedHashMap<>();
-
-    private List<CmdFeature> getSupportedCmdFeatures() {
-        return Arrays.asList((CmdFeature) new DockerFeature(), (CmdFeature) new DockerComposeFeature());
-    }
 
     @PostConstruct
     public void init() {
-        initCmdFeature();
-    }
-
-    private void initCmdFeature() {
-        List<CmdFeature> cmds = getSupportedCmdFeatures();
+        CmdFeature docker = (CmdFeature) new DockerFeature(commandExecutor);
+        CmdFeature dockerCompose = (CmdFeature) new DockerComposeFeature(commandExecutor);
+        supportedFeatures = Arrays.asList(docker, dockerCompose);
+        
+        List<CmdFeature> cmds = getSupportedFeatures();
         for (CmdFeature cmd : cmds) {
             features.put(cmd.getName(), cmd);
         }
+    }
+    
+    @Override
+    public List<CmdFeature> getSupportedFeatures() {
+        return supportedFeatures;
     }
 
     @Override
@@ -54,19 +57,29 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public Map<String, Boolean> checkFeatureStatus() {
+    public Map<CmdFeature, Boolean> checkFeatureStatus(String ipAddress) throws Exception {
+        Server server = serverDao.findByServerIP(ipAddress);
+        
+        Map<CmdFeature, Boolean> rs = new LinkedHashMap<>();
+        for (CmdFeature feature : supportedFeatures) {
+            boolean status = false;
+            try {
+                status = feature.check(server);
+            } catch (Exception e) {
+            }
+            rs.put(feature, status);
+        }
+        return rs;
+    }
+
+    @Override
+    public CmdStatus installFeature(String ipAddress, String featureName) throws Exception {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public CmdStatus installFeature(String ipAddress, String featureName) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public CmdStatus uninstallFeature(String ipAddress, String featureName) {
+    public CmdStatus uninstallFeature(String ipAddress, String featureName) throws Exception {
         // TODO Auto-generated method stub
         return null;
     }

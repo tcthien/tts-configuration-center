@@ -26,9 +26,10 @@ public abstract class GenericDaoImpl<T extends DataModel> implements GenericDao<
     }
     
     @Override
-    public void add(T obj) {
-        em.merge(obj);
+    public T add(T obj) {
+        obj = em.merge(obj);
         em.flush();
+        return obj;
     }
 
     @Override

@@ -5,10 +5,6 @@ public abstract class AbstractCommand implements Command {
     private String command;
     private String sudoPass;
     
-    public AbstractCommand() {
-        this(null);
-    }
-
     public AbstractCommand(String cmd) {
         this(cmd, null);
     }
@@ -29,6 +25,11 @@ public abstract class AbstractCommand implements Command {
             return "echo " + sudoPass + " | sudo -S " + cmd;
         }
         return cmd;
+    }
+    
+    @Override
+    public int getTimeout() {
+        return -1;
     }
 
 }

@@ -46,6 +46,15 @@
             <cxf:logging />
         </jaxrs:features>
     </jaxrs:server>
-
+    
+    <jaxrs:server address="/sample/" id="SampleDataService">
+        <jaxrs:serviceBeans>
+            <ref component-id="sampleResourceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+    </jaxrs:server>
+    
 </blueprint>
 

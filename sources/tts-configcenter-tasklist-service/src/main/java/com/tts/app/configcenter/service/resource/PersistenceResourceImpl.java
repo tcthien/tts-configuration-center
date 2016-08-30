@@ -35,7 +35,7 @@ public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends G
     @POST
     @Override
     public Response addObject(T obj) {
-        getDao().add(obj);
+        obj = getDao().add(obj);
         URI taskURI = uri.getRequestUriBuilder().path(getClass(), "getObject").build(obj.getId());
         return Response.created(taskURI).build();
     }
