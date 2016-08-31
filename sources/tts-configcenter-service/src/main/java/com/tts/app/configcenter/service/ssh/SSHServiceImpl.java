@@ -80,7 +80,7 @@ public class SSHServiceImpl implements SSHService {
     }
 
     @Override
-    public SSHResult uninstallFeature(String ipAddress, SSHFeature feature) throws Exception {
+    public SSHResult uninstallFeature(String ipAddress, SSHFeature feature, boolean removeDependency) throws Exception {
         Server server = serverDao.findByServerIP(ipAddress);
         
         SoftwareFeature sshFeature = features.get(feature);

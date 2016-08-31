@@ -4,11 +4,12 @@ public class TTSPojoUtil {
     public static String toString(Object... objs) {
         StringBuilder sb = new StringBuilder();
         if (objs != null) {
-            String concat = "";
+            String concat = "[";
             for (Object object : objs) {
                 sb.append(concat).append(object);
                 concat = ", ";
             }
+            sb.append("]");
         }
         return sb.toString();
     }

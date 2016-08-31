@@ -85,7 +85,15 @@ public class SSHResourceImpl extends LogicResourceImpl {
     @DELETE
     @Path("/feature/{ipAddress}")
     public Response uninstallFeature(@PathParam("ipAddress") String ipAddress, SSHFeature feature) throws Exception {
-        SSHResult rs = sshService.uninstallFeature(ipAddress, feature);
+        SSHResult rs = sshService.uninstallFeature(ipAddress, feature, false);
+        SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
+        return Response.ok(status).build();
+    }
+    
+    @DELETE
+    @Path("/feature/{ipAddress}/dependencies")
+    public Response uninstallFeatureAndDependencies(@PathParam("ipAddress") String ipAddress, SSHFeature feature) throws Exception {
+        SSHResult rs = sshService.uninstallFeature(ipAddress, feature, true);
         SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
         return Response.ok(status).build();
     }

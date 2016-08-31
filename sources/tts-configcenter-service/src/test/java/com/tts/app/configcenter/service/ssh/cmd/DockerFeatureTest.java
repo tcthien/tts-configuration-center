@@ -33,7 +33,7 @@ public class DockerFeatureTest {
     }
     
     public void testUninstallDocker() throws Exception {
-        SSHResult rs = feature.uninstall(createServer());
+        SSHResult rs = feature.uninstall(createServer(), false);
         Assert.assertEquals(SSHResult.STATUS_OK, rs.getExistStatus());
     }
     

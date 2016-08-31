@@ -5,6 +5,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.tts.fwk.util.TTSPojoUtil;
 import com.tts.lib.model.generic.GenericModel;
 
 @Entity(name = "Zone")
@@ -14,7 +15,12 @@ import com.tts.lib.model.generic.GenericModel;
 public class Zone extends GenericModel {
 
     private String name;
-
+    
+    @Override
+    public String toString() {
+        return TTSPojoUtil.toString("Zone: " + name);
+    }
+    
     public Zone() {
     }
     

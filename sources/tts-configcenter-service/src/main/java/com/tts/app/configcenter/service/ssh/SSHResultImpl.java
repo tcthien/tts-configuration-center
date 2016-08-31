@@ -4,6 +4,14 @@ public class SSHResultImpl implements SSHResult {
 
     private int exitStatus;
     private String text;
+    
+    public SSHResultImpl() {
+    }
+    
+    public SSHResultImpl(int exitStatus, String text) {
+        this.exitStatus = exitStatus;
+        this.text = text;
+    }
 
     public int getExistStatus() {
         return exitStatus;

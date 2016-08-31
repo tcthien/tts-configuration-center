@@ -26,7 +26,7 @@ public class DockerFeature extends BasicFeature {
     }
 
     @Override
-    public SSHResult install(Server server) throws Exception {
+    protected SSHResult installComponent(Server server) throws Exception {
         new InstallDockerCommand(server.getPassword()).execute(getExecutor(), server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();
@@ -36,7 +36,7 @@ public class DockerFeature extends BasicFeature {
     }
 
     @Override
-    public SSHResult uninstall(Server server) throws Exception {
+    protected SSHResult uninstallComponent(Server server) throws Exception {
         new SimpleCommand("sudo apt-get purge -y docker-engine", server.getPassword()).execute(getExecutor(), server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();

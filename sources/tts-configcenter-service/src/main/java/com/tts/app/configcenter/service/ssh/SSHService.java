@@ -22,7 +22,7 @@ public interface SSHService {
 
     SSHResult installFeature(String ipAddress, SSHFeature feature) throws Exception;
 
-    SSHResult uninstallFeature(String ipAddress, SSHFeature feature) throws Exception;
+    SSHResult uninstallFeature(String ipAddress, SSHFeature feature, boolean removeDependency) throws Exception;
 
     void addFeature(SoftwareFeature feature);
 }

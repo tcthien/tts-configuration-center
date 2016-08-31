@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.tts.app.configcenter.model.zone.Zone;
+import com.tts.fwk.util.TTSPojoUtil;
 import com.tts.lib.model.generic.GenericModel;
 
 @Entity(name = "Server")
@@ -20,6 +21,11 @@ public class Server extends GenericModel {
     private String userName;
     private String password;
     private String ipAddress;
+    
+    @Override
+    public String toString() {
+        return TTSPojoUtil.toString("Server: " + name);
+    }
     
     @ManyToOne(optional = false)
     private Zone zone;

@@ -12,13 +12,14 @@ public class DockerComposeFeature extends BasicFeature {
 
     public DockerComposeFeature(SSHCommandExecutor executor) {
         super(executor);
+        addDependency(new DockerFeature(executor));
     }
 
     @Override
     public SSHFeature getFeatureInfo() {
         return SSHFeature.create().name("Docker Compose").osName("ubuntu").osVersion("all").description("Feature to support docker-compose command");
     }
-
+    
     @Override
     public boolean check(Server server) throws Exception {
         SSHResult rs = new SimpleCommand("docker-compose --version").execute(executor, server);
@@ -26,7 +27,7 @@ public class DockerComposeFeature extends BasicFeature {
     }
 
     @Override
-    public SSHResult install(Server server) throws Exception {
+    protected SSHResult installComponent(Server server) throws Exception {
         new InstallDockerComposeCommand(server.getPassword()).execute(executor, server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();
@@ -36,7 +37,7 @@ public class DockerComposeFeature extends BasicFeature {
     }
 
     @Override
-    public SSHResult uninstall(Server server) throws Exception {
+    protected SSHResult uninstallComponent(Server server) throws Exception {
         new SimpleCommand("sudo rm /usr/local/bin/docker-compose", server.getPassword()).execute(executor, server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();
