@@ -84,6 +84,6 @@ public class SSHServiceImpl implements SSHService {
         Server server = serverDao.findByServerIP(ipAddress);
         
         SoftwareFeature sshFeature = features.get(feature);
-        return sshFeature.uninstall(server);
+        return sshFeature.uninstall(server, removeDependency);
     }
 }
