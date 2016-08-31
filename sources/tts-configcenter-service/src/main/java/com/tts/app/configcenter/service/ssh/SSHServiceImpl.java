@@ -5,26 +5,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.ops4j.pax.cdi.api.OsgiService;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
-import org.ops4j.pax.cdi.api.Properties;
-import org.ops4j.pax.cdi.api.Property;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.service.ssh.cmd.common.PingCommand;
+import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
+import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
 import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
 
-
-@OsgiServiceProvider(classes = {SSHService.class})
-//The properties below allow to transparently export the service as a web service using Distributed OSGi
-@Properties({
-@Property(name = "service.exported.interfaces", value = "*")
-})
 @Named
 public class SSHServiceImpl implements SSHService {
     
@@ -36,6 +30,12 @@ public class SSHServiceImpl implements SSHService {
     
     
     Map<SSHFeature, SoftwareFeature> features = new LinkedHashMap<>();
+    
+    @PostConstruct
+    public void init() {
+        addFeature(new DockerFeature(commandExecutor));
+        addFeature(new DockerComposeFeature(commandExecutor));
+    }
     
     @Override
     public void addFeature(SoftwareFeature feature) {

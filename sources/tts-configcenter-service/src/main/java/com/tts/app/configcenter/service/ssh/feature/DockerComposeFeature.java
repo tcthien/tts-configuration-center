@@ -1,16 +1,18 @@
 package com.tts.app.configcenter.service.ssh.feature;
 
-import javax.inject.Named;
-
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
+import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
 import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerComposeCommand;
 
-@Named
 public class DockerComposeFeature extends BasicFeature {
+
+    public DockerComposeFeature(SSHCommandExecutor executor) {
+        super(executor);
+    }
 
     @Override
     public SSHFeature getFeatureInfo() {
