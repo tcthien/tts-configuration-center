@@ -39,11 +39,4 @@
         <feature>war</feature>
         <bundle>mvn:${groupId}/tts-configcenter-angular-ui/${pom.version}</bundle>
     </feature>
-    <feature name="tts-configcenter-ui-old" version="${pom.version}">
-        <feature>http</feature>
-        <feature>http-whiteboard</feature>
-        <bundle>mvn:${groupId}/tts-configcenter-model/${pom.version}</bundle>
-        <bundle>mvn:${groupId}/tts-configcenter-ui/${pom.version}</bundle>
-    </feature>
-   
 </features>

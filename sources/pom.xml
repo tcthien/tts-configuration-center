@@ -18,7 +18,6 @@
     <modules>
         <module>tts-configcenter-model</module>
         <module>tts-configcenter-persistence</module>
-        <module>tts-configcenter-ui</module>
         <module>tts-configcenter-features</module>
         <module>tts-configcenter-service</module>
         <module>tts-configcenter-angular-ui</module>
