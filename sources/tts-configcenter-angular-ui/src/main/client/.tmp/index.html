@@ -11,7 +11,7 @@
   
     <!-- build:css({.tmp,src}) styles/vendor.css -->
     <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <link rel="stylesheet" href="../bower_components/materialize/bin/materialize.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -29,13 +29,26 @@
 
   <!-- build:js({.tmp,src}) scripts/vendor.js -->
   <!-- bower:js -->
-  <!-- run `gulp inject` to automatically populate bower script dependencies -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="../bower_components/materialize/bin/materialize.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:js({.tmp,src}) scripts/app.js -->
   <!-- inject:js -->
-  <!-- js files will be automatically insert here -->
+  <script src="app/todos/todos.js"></script>
+  <script src="index.js"></script>
+  <script src="app/constants/TodoFilters.js"></script>
+  <script src="app/constants/VisibilityFilters.js"></script>
+  <script src="app/containers/App.js"></script>
+  <script src="app/components/Footer.js"></script>
+  <script src="app/components/Header.js"></script>
+  <script src="app/components/MainSection.js"></script>
+  <script src="app/components/TodoItem.js"></script>
+  <script src="app/components/TodoTextInput.js"></script>
+  <script src="routes.js"></script>
   <!-- endinject -->
   <!-- inject:partials -->
   <!-- angular templates will be automatically converted in js and inserted here -->

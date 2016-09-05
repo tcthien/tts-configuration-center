@@ -56,5 +56,13 @@
         </jaxrs:features>
     </jaxrs:server>
     
+    <jaxrs:server address="/util/" id="UtilService">
+        <jaxrs:serviceBeans>
+            <ref component-id="utilResourceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+    </jaxrs:server>
 </blueprint>
 

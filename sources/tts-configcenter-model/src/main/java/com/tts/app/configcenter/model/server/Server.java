@@ -21,6 +21,7 @@ public class Server extends GenericModel {
     private String userName;
     private String password;
     private String ipAddress;
+    private String description;
     
     @Override
     public String toString() {
@@ -68,5 +69,13 @@ public class Server extends GenericModel {
     
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
