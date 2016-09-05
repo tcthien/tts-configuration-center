@@ -19,7 +19,13 @@ Download and start Karaf 4.0.5
 
 Start karaf and execute the commands below
 
-Copy <root>/org.ops4j.datasource-configcenter.cfg to <karaf>/etc
+H2 Memory DB:
+	Copy <root>/org.ops4j.datasource-configcenter.cfg to <karaf>/etc
+MySQL DB:
+	install -s mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.9.0
+	install -s mvn:mysql/mysql-connector-java/5.1.18
+	Copy datasource-mysql.xml to <karaf>/deploy
+
 Copy jsch-0.1.53.jar JSCH from <home dir>/.m2/repository/com/jcraft/jsch/0.1.53/ to <karaf>/deploy 
 
 ```Shell

@@ -1,9 +1,9 @@
 package com.tts.app.configcenter.model.server;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -16,28 +16,21 @@ import com.tts.lib.model.generic.GenericModel;
 @XmlType
 @XmlRootElement
 public class Server extends GenericModel {
-    
-    private String name;
+
+    private String serverName;
     private String userName;
+    @Column(name = "sudoPassword")
     private String password;
     private String ipAddress;
     private String description;
-    
+
     @Override
     public String toString() {
-        return TTSPojoUtil.toString("Server: " + name);
-    }
-    
-    @ManyToOne(optional = false)
-    private Zone zone;
-    
-    public String getName() {
-        return name;
+        return TTSPojoUtil.toString("Server: " + serverName);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @ManyToOne(optional = false)
+    private Zone zone;
 
     public String getUserName() {
         return userName;
@@ -62,11 +55,11 @@ public class Server extends GenericModel {
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
-    
+
     public Zone getZone() {
         return zone;
     }
-    
+
     public void setZone(Zone zone) {
         this.zone = zone;
     }
@@ -77,5 +70,13 @@ public class Server extends GenericModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 }

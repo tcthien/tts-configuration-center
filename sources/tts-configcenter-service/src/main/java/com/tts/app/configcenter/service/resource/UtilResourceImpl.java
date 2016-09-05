@@ -36,7 +36,7 @@ public class UtilResourceImpl {
     public void massCreateZoneAndServers(MassCreation info) {
         // Add new Zone
         Zone zone = new Zone();
-        zone.setName(info.getZoneName());
+        zone.setZoneName(info.getZoneName());
         zone = zoneDao.add(zone);
         
         // Parsing & Add servers
@@ -47,7 +47,7 @@ public class UtilResourceImpl {
 
                 Server ser = new Server();
                 ser.setZone(zone);
-                ser.setName(serverInfo[0]);
+                ser.setServerName(serverInfo[0]);
                 ser.setIpAddress(serverInfo[1]);
                 ser.setUserName(serverInfo[2]);
                 ser.setPassword(serverInfo[3]);

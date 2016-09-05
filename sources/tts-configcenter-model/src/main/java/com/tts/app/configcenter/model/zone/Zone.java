@@ -14,27 +14,27 @@ import com.tts.lib.model.generic.GenericModel;
 @XmlRootElement
 public class Zone extends GenericModel {
 
-    private String name;
-    
+    private String zoneName;
+
     @Override
     public String toString() {
-        return TTSPojoUtil.toString("Zone: " + name);
+        return TTSPojoUtil.toString("Zone: " + zoneName);
     }
-    
+
     public Zone() {
     }
-    
-    public Zone(Integer id, String name) {
+
+    public Zone(Integer id, String zoneName) {
         this.id = id;
-        this.name = name;
+        this.zoneName = zoneName;
     }
 
-    public String getName() {
-        return name;
+    public String getZoneName() {
+        return zoneName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
     }
-    
+
 }

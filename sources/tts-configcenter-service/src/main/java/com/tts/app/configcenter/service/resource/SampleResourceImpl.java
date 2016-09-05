@@ -36,7 +36,7 @@ public class SampleResourceImpl {
         server.setIpAddress("192.168.100.100");
         server.setUserName("tcthien");
         server.setPassword("tcthien");
-        server.setName("Ubuntu DEV");
+        server.setServerName("Ubuntu DEV");
         server.setZone(zone1);
         serverDao.add(server);
     }
