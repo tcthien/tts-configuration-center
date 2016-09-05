@@ -49,18 +49,6 @@ public class SSHResourceImpl extends LogicResourceImpl {
     }
     
     @GET
-    @Path("/feature")
-    public List<SSHFeature> getSupportedFeature() {
-        List<SSHFeature> rs = new ArrayList<>();
-        
-        List<SoftwareFeature> features = sshService.getSupportedFeatures();
-        for (SoftwareFeature feature : features) {
-            rs.add(feature.getFeatureInfo());
-        }
-        return rs;
-    }
-
-    @GET
     @Path("/check/{ipAddress}")
     public List<SSHFeature> checkFeatureStatus(@PathParam("ipAddress") String ipAddress) throws Exception {
         List<SSHFeature> rs = new ArrayList<>();
@@ -96,5 +84,17 @@ public class SSHResourceImpl extends LogicResourceImpl {
         SSHResult rs = sshService.uninstallFeature(ipAddress, feature, true);
         SSHStatus status = new SSHStatus(rs.getExistStatus() == SSHResult.STATUS_OK ? "ok" : "nok");
         return Response.ok(status).build();
+    }
+    
+    @GET
+    @Path("/feature")
+    public List<SSHFeature> getSupportedFeature() {
+        List<SSHFeature> rs = new ArrayList<>();
+        
+        List<SoftwareFeature> features = sshService.getSupportedFeatures();
+        for (SoftwareFeature feature : features) {
+            rs.add(feature.getFeatureInfo());
+        }
+        return rs;
     }
 }
