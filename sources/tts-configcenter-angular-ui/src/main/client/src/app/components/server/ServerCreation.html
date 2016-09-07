@@ -9,6 +9,15 @@
   type="text"
 />
  -->
+ <script type="text/javascript">
+$(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+    
+    $('.modal-trigger').leanModal();
+  });
+</script>
  
 <div id="serverCreationDlg" class="modal">
     <div class="modal-content tts-cc-modal">
