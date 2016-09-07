@@ -1,0 +1,47 @@
+<!-- 
+<input
+  class="textInput"
+  ng-class="{'edit': $ctrl.editing, 'new-todo': $ctrl.newTodo}"
+  ng-model="$ctrl.text"
+  ng-keypress="$ctrl.handleSubmit($event)"
+  ng-blur="$ctrl.handleBlur()"
+  placeholder="{{$ctrl.placeholder}}"
+  type="text"
+/>
+ -->
+ 
+<div id="serverCreationDlg" class="modal">
+    <div class="modal-content tts-cc-modal">
+        <h4>Create Server</h4>
+        <div class="row tts-cc-formrow">
+            <form class="col s12">
+                <div class="row tts-cc-formrow">
+                    <div class="input-field col s6">
+                        <input id="form-server_name" type="text" class="validate" placeholder="Your Server Name...">
+                        <label for="form-server_name" class="active">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="form-server_ip" type="text" class="validate" placeholder="Your IP Address...">
+                        <label for="form-server_ip" class="active">IP</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="form-server_username" class="active" placeholder="Your User Name..."></input>
+                        <label for="form-server_username" class="active">User Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="form-server_password" class="active" type="password" placeholder="Your Password..."></input>
+                        <label for="form-server_password" class="active">Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                          <textarea id="form-server_description" class="materialize-textarea" placeholder="Your Server's Description..."></textarea>
+                          <label for="form-server_description" class="active">Description</label>
+                      </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action waves-effect waves-green btn-flat">Add</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Canel</a>
+    </div>
+</div>

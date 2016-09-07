@@ -38,16 +38,21 @@
 
   <!-- build:js({.tmp,src}) scripts/app.js -->
   <!-- inject:js -->
-  <script src="app/todos/todos.js"></script>
   <script src="index.js"></script>
   <script src="app/constants/TodoFilters.js"></script>
   <script src="app/constants/VisibilityFilters.js"></script>
   <script src="app/containers/App.js"></script>
-  <script src="app/components/Footer.js"></script>
-  <script src="app/components/Header.js"></script>
-  <script src="app/components/MainSection.js"></script>
-  <script src="app/components/TodoItem.js"></script>
-  <script src="app/components/TodoTextInput.js"></script>
+  <script src="app/layout/Footer.js"></script>
+  <script src="app/layout/Header.js"></script>
+  <script src="app/layout/MainSection.js"></script>
+  <script src="app/components/server/ServerController.js"></script>
+  <script src="app/components/server/ServerCreation.js"></script>
+  <script src="app/components/server/ServerInfoSummary.js"></script>
+  <script src="app/components/todo/TodoItem.js"></script>
+  <script src="app/components/todo/TodoTextInput.js"></script>
+  <script src="app/components/util/MassCreation.js"></script>
+  <script src="app/services/todos/todos.js"></script>
+  <script src="app/services/util/util.js"></script>
   <script src="routes.js"></script>
   <!-- endinject -->
   <!-- inject:partials -->

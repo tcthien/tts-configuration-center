@@ -5,7 +5,7 @@ describe('TodoTextInput component', () => {
   beforeEach(module('app', $provide => {
     $provide.factory('todoTextInput', () => {
       return {
-        templateUrl: 'app/components/TodoTextInput.html'
+        templateUrl: 'app/components/util/MassCreation.html'
       };
     });
   }));

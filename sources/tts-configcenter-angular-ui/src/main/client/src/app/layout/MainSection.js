@@ -39,7 +39,7 @@ class MainSection {
 angular
   .module('app')
   .component('mainSection', {
-    templateUrl: 'app/components/MainSection.html',
+    templateUrl: 'app/layout/MainSection.html',
     controller: MainSection,
     bindings: {
       todos: '=',

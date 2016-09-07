@@ -28,7 +28,7 @@ describe('Header component', () => {
   beforeEach(module('app', $provide => {
     $provide.factory('headerComponent', () => {
       return {
-        templateUrl: 'app/components/Header.html'
+        templateUrl: 'app/layout/Header.html'
       };
     });
   }));

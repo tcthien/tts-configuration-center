@@ -1,0 +1,93 @@
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+    
+    $('.modal-trigger').leanModal();
+  });
+  
+  function openServerCreationDlg(){
+	  $('#serverCreationDlg').openModal();
+  }
+</script>
+
+ <!-- Server Creation Dialog -->
+<create-server-component></create-server-component>
+
+<!-- Page Layout here -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="mass-creation col m3 s12">
+                <!-- Using Mass Creation Component -->
+                <mass-creation-component></mass-creation-component>
+            </div>
+            
+            <div class="col m9 s12">
+                <ul class="">
+                    <!-- TMA LAB 2 -->
+                    <li>
+                        <div>
+                            <div class="collapsible-header active">
+                                <i class="material-icons">location_city</i>TMA - LAB 2
+                                <i class="material-icons right" title="Add More Server" onclick="openServerCreationDlg()">add</i>
+                                <!-- 
+                                <i class="material-icons right" title="Install Feature">system_update_alt</i>
+                                 -->
+                            </div>
+                            <div class="zone-body">
+                                <ul class="row">
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                    
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                    
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                    
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- TMA LAB 3 -->
+                    <li>
+                        <div>
+                            <div class="collapsible-header active">
+                                <i class="material-icons">location_city</i>TMA - LAB 3
+                                <i class="material-icons right" title="Add More Server" onclick="openServerCreationDlg()">add</i>
+                                <!-- 
+                                <i class="material-icons right" title="Install Feature">system_update_alt</i>
+                                 -->
+                            </div>
+                            <div class="zone-body">
+                                <ul class="row">
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                    
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                    
+                                    <li class="col l4 m6 s12">
+                                        <server-info-summary-component></server-info-summary-component>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>        
+        
+    </div>
+</div>

@@ -25,7 +25,7 @@ class TodoItem {
 angular
   .module('app')
   .component('todoItem', {
-    templateUrl: 'app/components/TodoItem.html',
+    templateUrl: 'app/components/todo/TodoItem.html',
     controller: TodoItem,
     bindings: {
       todo: '<',

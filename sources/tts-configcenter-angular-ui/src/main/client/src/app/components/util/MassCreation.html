@@ -1,0 +1,28 @@
+<!-- 
+<input
+  class="textInput"
+  ng-class="{'edit': $ctrl.editing, 'new-todo': $ctrl.newTodo}"
+  ng-model="$ctrl.text"
+  ng-keypress="$ctrl.handleSubmit($event)"
+  ng-blur="$ctrl.handleBlur()"
+  placeholder="{{$ctrl.placeholder}}"
+  type="text"
+/>
+ -->
+ 
+<h4 class="">Mass Creation</h4>
+<form class="col s12">
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="form-zone_name" type="text" class="validate" placeholder="Your Zone Name...">
+          <label for="form-zone_name" class="active">Zone Name</label>
+        </div>
+      <div class="input-field col s12">
+          <label for="form-servers" class="active">Servers</label>
+          <textarea id="form-servers" class="materialize-textarea" placeholder="Name, IP Address, user name, password"></textarea>
+      </div>
+      <div class="input-field col s12">
+            <a class="waves-effect btn right">Add</a>
+      </div>
+  </div>
+</form>

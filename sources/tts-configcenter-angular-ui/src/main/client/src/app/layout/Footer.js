@@ -1,6 +1,6 @@
 class Footer {
-  constructor() {
-  }
+//  constructor() {
+//  }
 
   handleClear() {
   }
@@ -12,7 +12,7 @@ class Footer {
 angular
   .module('app')
   .component('footerComponent', {
-    templateUrl: 'app/components/Footer.html',
+    templateUrl: 'app/layout/Footer.html',
     controller: Footer
   });
 

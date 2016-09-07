@@ -1,4 +1,4 @@
-class TodoTextInput {
+class ServerController {
   /** @ngInject */
   constructor(todoService, $window, $timeout) {
     this.$timeout = $timeout;
@@ -35,17 +35,3 @@ class TodoTextInput {
     }, 0);
   }
 }
-
-angular
-  .module('app')
-  .component('todoTextInput', {
-    templateUrl: 'app/components/TodoTextInput.html',
-    controller: TodoTextInput,
-    bindings: {
-      onSave: '&',
-      placeholder: '@',
-      newTodo: '@',
-      editing: '@',
-      text: '<'
-    }
-  });

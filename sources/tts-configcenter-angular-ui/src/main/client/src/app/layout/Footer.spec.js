@@ -2,7 +2,7 @@ describe('Footer component', () => {
   beforeEach(module('app', $provide => {
     $provide.factory('footerComponent', () => {
       return {
-        templateUrl: 'app/components/Footer.html'
+        templateUrl: 'app/layout/Footer.html'
       };
     });
   }));
