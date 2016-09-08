@@ -4,38 +4,25 @@ function openServerCreationDlg() {
 
 class ZoneController {
   /** @ngInject */
-  constructor(todoService, $window, $timeout) {
-    this.$timeout = $timeout;
-    this.$window = $window;
-    this.todoService = todoService;
-    this.editing = this.editing || false;
-    this.text = this.text || '';
-    if (this.text.length) {
-      this.focus();
-    }
+  constructor($scope, $log, zoneService, $rootScope) {
+    this.log = $log;
+    this.zoneService = zoneService;
+    this.rootScope = $rootScope;
+    // Preload Zone from Server
+    this.loadAllZone();
+    // Register event for reloading new data
+    this.rootScope.$on('reloadData', () => {
+      this.log.debug('invoke reloadData....');
+      this.loadAllZone();
+    });
+    // Unregister listener on root if controller is destroyed
+    $scope.$on('$destroy', function () {
+      this.rootScope.$$listeners.reloadData = [];
+    });
   }
-
-  handleBlur() {
-    if (!this.newTodo) {
-      this.onSave({text: this.text});
-    }
-  }
-
-  handleSubmit(e) {
-    if (e.keyCode === 13) {
-      this.onSave({text: this.text});
-      if (this.newTodo) {
-        this.text = '';
-      }
-    }
-  }
-
-  focus() {
-    this.$timeout(() => {
-      const element = this.$window.document.querySelector('.editing .textInput');
-      if (element) {
-        element.focus();
-      }
-    }, 0);
+  loadAllZone() {
+    return this.zoneService.loadAllZone(fetchedZones => {
+      this.zones = fetchedZones;
+    });
   }
 }

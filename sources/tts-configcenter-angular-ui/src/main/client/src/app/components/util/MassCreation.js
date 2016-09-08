@@ -1,15 +1,18 @@
 class MassCreationController {
   /** @ngInject */
-  constructor($scope, $log, utilService) {
+  constructor($scope, $log, utilService, $rootScope) {
     this.log = $log;
     this.utilService = utilService;
+    this.rootScope = $rootScope;
     this.massCreation = {
       zoneName: 'Your Zone Name',
       servers: 'Name, IP Address, user name, password, Description'
     };
   }
   handleSubmit() {
-    this.utilService.submitMassCreation(this.massCreation);
+    this.utilService.submitMassCreation(this.massCreation, callback => {
+      this.rootScope.$emit('reloadData');
+    });
   }
   handleReset() {
     this.massCreation.zoneName = null;
