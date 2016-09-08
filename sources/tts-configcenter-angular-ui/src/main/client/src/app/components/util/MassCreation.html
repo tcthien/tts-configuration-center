@@ -17,15 +17,18 @@
 <form class="col s12">
     <div class="row">
         <div class="input-field col s12">
-          <input id="form-zone_name" type="text" class="validate" placeholder="Your Zone Name...">
+          <input id="form-zone_name" type="text" class="validate" placeholder="Your Zone Name..." 
+                ng-model="$ctrl.massCreation.zoneName">
           <label for="form-zone_name" class="active">Zone Name</label>
         </div>
       <div class="input-field col s12">
           <label for="form-servers" class="active">Servers</label>
-          <textarea id="form-servers" class="materialize-textarea" placeholder="Name, IP Address, user name, password"></textarea>
+          <textarea id="form-servers" class="materialize-textarea" placeholder="Name, IP Address, user name, password, Description..."
+                ng-model="$ctrl.massCreation.servers"></textarea>
       </div>
       <div class="input-field col s12">
-            <a class="waves-effect btn right">Add</a>
+            <a class="waves-effect btn right" ng-click="$ctrl.handleSubmit()">Add</a>
+            <a class="waves-effect btn right tts-masscreation-reset" ng-click="$ctrl.handleReset()">Reset</a>
       </div>
   </div>
 </form>

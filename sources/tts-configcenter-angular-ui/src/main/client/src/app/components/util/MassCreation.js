@@ -1,38 +1,19 @@
 class MassCreationController {
   /** @ngInject */
-  constructor(todoService, $window, $timeout) {
-    this.$timeout = $timeout;
-    this.$window = $window;
-    this.todoService = todoService;
-    this.editing = this.editing || false;
-    this.text = this.text || '';
-    if (this.text.length) {
-      this.focus();
-    }
+  constructor($scope, $log, utilService) {
+    this.log = $log;
+    this.utilService = utilService;
+    this.massCreation = {
+      zoneName: 'Your Zone Name',
+      servers: 'Name, IP Address, user name, password, Description'
+    };
   }
-
-  handleBlur() {
-    if (!this.newTodo) {
-      this.onSave({text: this.text});
-    }
+  handleSubmit() {
+    this.utilService.submitMassCreation(this.massCreation);
   }
-
-  handleSubmit(e) {
-    if (e.keyCode === 13) {
-      this.onSave({text: this.text});
-      if (this.newTodo) {
-        this.text = '';
-      }
-    }
-  }
-
-  focus() {
-    this.$timeout(() => {
-      const element = this.$window.document.querySelector('.editing .textInput');
-      if (element) {
-        element.focus();
-      }
-    }, 0);
+  handleReset() {
+    this.massCreation.zoneName = null;
+    this.massCreation.servers = null;
   }
 }
 
@@ -42,7 +23,5 @@ angular
     templateUrl: 'app/components/util/MassCreation.html',
     controller: MassCreationController,
     bindings: {
-      onSave: '&',
-      onReset: '@'
     }
   });
