@@ -33,7 +33,7 @@ public class InitHelper {
                         addSampleTask();
                     }
 
-                    if (zoneDao.get(1) == null) {
+                    if (zoneDao.get(1L) == null) {
                         addSampleZone();
                     }
 
@@ -46,12 +46,12 @@ public class InitHelper {
     }
 
     private void addSampleTask() {
-        Task task = new Task(1, "Just a sample task", "Some more info");
+        Task task = new Task(1L, "Just a sample task", "Some more info");
         taskService.addTask(task);
     }
 
     private void addSampleZone() {
-        Zone zone = new Zone(1, "Test Zone");
+        Zone zone = new Zone(1L, "Test Zone");
         zoneDao.add(zone);
     }
 

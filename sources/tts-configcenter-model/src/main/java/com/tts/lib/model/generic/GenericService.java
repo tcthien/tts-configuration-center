@@ -1,9 +1,9 @@
 package com.tts.lib.model.generic;
 
 public interface GenericService<T> {
-    T get(Integer id);
+    T get(Long id);
 
     void update(T object);
 
-    void delete(Integer id);
+    void delete(Long id);
 }

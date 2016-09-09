@@ -1,10 +1,12 @@
 package com.tts.app.configcenter.persistence.impl.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -14,6 +16,7 @@ import org.ops4j.pax.cdi.api.Property;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
+import com.tts.app.configcenter.model.server.ServerQueryFilter;
 import com.tts.lib.persistence.impl.generic.GenericDaoImpl;
 
 @OsgiServiceProvider(classes = {ServerDao.class})
@@ -23,7 +26,7 @@ import com.tts.lib.persistence.impl.generic.GenericDaoImpl;
 })
 @Named(value = "serverDao")
 @Transactional
-public class ServerDaoImpl extends GenericDaoImpl<Server> implements ServerDao {
+public class ServerDaoImpl extends GenericDaoImpl<Server, ServerQueryFilter> implements ServerDao {
 
     public ServerDaoImpl() {
         super(Server.class);
@@ -32,15 +35,24 @@ public class ServerDaoImpl extends GenericDaoImpl<Server> implements ServerDao {
     @Transactional(Transactional.TxType.SUPPORTS)
     @Override
     public Server findByServerIP(String ipAddress) {
-        CriteriaBuilder builder = getCriteriaBuilder();
-        
-        CriteriaQuery<Server> criteria = builder.createQuery( Server.class );
-        Root<Server> personRoot = criteria.from(Server.class);
-        criteria.select( personRoot );
-        criteria.where(builder.equal(personRoot.get("ipAddress"), ipAddress));
-        List<Server> lst = em.createQuery(criteria).getResultList();
-        
+        ServerQueryFilter myFilter = new ServerQueryFilter();
+        myFilter.setIpAddress(ipAddress);
+        List<Server> lst = findByQuery(myFilter);
         return lst.isEmpty() ? null : lst.iterator().next();
     }
-
+    
+    @Override
+    protected List<Predicate> decorate(CriteriaBuilder builder, Root<Server> rootQuery, ServerQueryFilter myFilter) {
+        List<Predicate> andQueries = new ArrayList<>();
+        
+        if (myFilter.getIpAddress() != null && !myFilter.getIpAddress().isEmpty()) {
+            andQueries.add(builder.equal(rootQuery.get("ipAddress"), myFilter.getIpAddress()));
+        }
+        if (myFilter.getZoneIds() != null && !myFilter.getZoneIds().isEmpty()) {
+            Join<Object, Object> join = rootQuery.join("zone");
+            andQueries.add(join.get("id").in(myFilter.getZoneIds()));
+        }
+        
+        return andQueries;
+    }
 }

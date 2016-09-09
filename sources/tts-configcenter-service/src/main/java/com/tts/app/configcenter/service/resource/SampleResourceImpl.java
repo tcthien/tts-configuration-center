@@ -27,10 +27,10 @@ public class SampleResourceImpl {
     
     @POST
     public void initSampleData() {
-        Zone zone1 = new Zone(1, "Demo Zone");
+        Zone zone1 = new Zone(1L, "Demo Zone");
         zoneDao.add(zone1);
-        zoneDao.add(new Zone(2, "TMA Zone"));
-        zoneDao.add(new Zone(3, "Home Zone"));
+        zoneDao.add(new Zone(2L, "TMA Zone"));
+        zoneDao.add(new Zone(3L, "Home Zone"));
         
         Server server = new Server();
         server.setIpAddress("192.168.100.100");

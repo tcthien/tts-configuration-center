@@ -2,6 +2,7 @@ package com.tts.app.configcenter.service.resource;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,10 +15,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.tts.app.configcenter.model.util.QueryFilter;
 import com.tts.lib.model.generic.DataModel;
 import com.tts.lib.model.generic.GenericDao;
 
-public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends GenericDao<T>> implements PersistenceResource<T> {
+public abstract class PersistenceResourceImpl<T extends DataModel, QUERY extends QueryFilter, DAO extends GenericDao<T, QUERY>> implements PersistenceResource<T, QUERY> {
 
     public abstract DAO getDao();
     
@@ -27,7 +29,7 @@ public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends G
     @GET
     @Path("/{id}")
     @Override
-    public Response getObject(@PathParam("id") Integer id) {
+    public Response getObject(@PathParam("id") Long id) {
         T item = getDao().get(id);
         return item == null ? Response.status(Status.NOT_FOUND).build() : Response.ok(item).build();
     }
@@ -39,6 +41,13 @@ public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends G
         URI taskURI = uri.getRequestUriBuilder().path(getClass(), "getObject").build(obj.getId());
         return Response.created(taskURI).build();
     }
+    
+    @POST
+    @Override
+    @Path("/query")
+    public List<T> findByQuery(QUERY filter) {
+        return getDao().findByQuery(filter);
+    }
 
     @GET
     @Override
@@ -49,7 +58,7 @@ public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends G
     @PUT
     @Path("/{id}")
     @Override
-    public void updateObject(@PathParam("id") Integer id, T object) {
+    public void updateObject(@PathParam("id") Long id, T object) {
         object.setId(id);
         getDao().update(object);
     }
@@ -57,7 +66,7 @@ public abstract class PersistenceResourceImpl<T extends DataModel, DAO extends G
     @DELETE
     @Path("/{id}")
     @Override
-    public void deleteObject(@PathParam("id") Integer id) {
+    public void deleteObject(@PathParam("id") Long id) {
         getDao().delete(id);
     }
 

@@ -5,5 +5,5 @@ import javax.jws.WebService;
 import com.tts.lib.model.generic.GenericDao;
 
 @WebService
-public interface ZoneDao extends GenericDao<Zone> {
+public interface ZoneDao extends GenericDao<Zone, ZoneQueryFilter> {
 }

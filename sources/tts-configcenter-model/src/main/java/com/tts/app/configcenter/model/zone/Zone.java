@@ -23,8 +23,8 @@ public class Zone extends GenericModel {
 
     public Zone() {
     }
-
-    public Zone(Integer id, String zoneName) {
+    
+    public Zone(Long id, String zoneName) {
         this.id = id;
         this.zoneName = zoneName;
     }
@@ -36,5 +36,4 @@ public class Zone extends GenericModel {
     public void setZoneName(String zoneName) {
         this.zoneName = zoneName;
     }
-
 }

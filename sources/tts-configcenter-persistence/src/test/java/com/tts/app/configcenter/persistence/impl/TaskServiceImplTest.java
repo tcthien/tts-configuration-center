@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.tts.app.configcenter.model.Task;
-import com.tts.app.configcenter.persistence.impl.TaskServiceImpl;
 
 public class TaskServiceImplTest {
 
@@ -23,7 +22,7 @@ public class TaskServiceImplTest {
 
         em.getTransaction().begin();
         Task task = new Task();
-        task.setId(1);
+        task.setId(1L);
         task.setTitle("Test task");
         taskService.addTask(task);
         em.getTransaction().commit();
@@ -31,7 +30,7 @@ public class TaskServiceImplTest {
 
         Assert.assertEquals(1, persons.size());
         Task task1 = persons.iterator().next();
-        Assert.assertEquals(new Integer(1), task1.getId());
+        Assert.assertEquals(new Long(1), task1.getId());
         Assert.assertEquals("Test task", task1.getTitle());
     }
 

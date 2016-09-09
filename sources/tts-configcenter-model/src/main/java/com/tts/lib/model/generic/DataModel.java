@@ -1,6 +1,6 @@
 package com.tts.lib.model.generic;
 
 public interface DataModel {
-    Integer getId();
-    void setId(Integer id);
+    Long getId();
+    void setId(Long id);
 }

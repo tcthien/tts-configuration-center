@@ -9,6 +9,7 @@ import org.ops4j.pax.cdi.api.Property;
 
 import com.tts.app.configcenter.model.zone.Zone;
 import com.tts.app.configcenter.model.zone.ZoneDao;
+import com.tts.app.configcenter.model.zone.ZoneQueryFilter;
 import com.tts.lib.persistence.impl.generic.GenericDaoImpl;
 
 @OsgiServiceProvider(classes = {ZoneDao.class})
@@ -18,7 +19,7 @@ import com.tts.lib.persistence.impl.generic.GenericDaoImpl;
 })
 @Named(value = "zoneDao")
 @Transactional
-public class ZoneDaoImpl extends GenericDaoImpl<Zone> implements ZoneDao {
+public class ZoneDaoImpl extends GenericDaoImpl<Zone, ZoneQueryFilter> implements ZoneDao {
 
     public ZoneDaoImpl() {
         super(Zone.class);

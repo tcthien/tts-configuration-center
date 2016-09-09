@@ -23,15 +23,17 @@ public class Server extends GenericModel {
     private String password;
     private String ipAddress;
     private String description;
-
+    @ManyToOne
+    private Zone zone;
+    public Zone getZone() {
+        return zone;
+    }
+    
     @Override
     public String toString() {
         return TTSPojoUtil.toString("Server: " + serverName);
     }
-
-    @ManyToOne(optional = false)
-    private Zone zone;
-
+    
     public String getUserName() {
         return userName;
     }
@@ -54,10 +56,6 @@ public class Server extends GenericModel {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
-    }
-
-    public Zone getZone() {
-        return zone;
     }
 
     public void setZone(Zone zone) {

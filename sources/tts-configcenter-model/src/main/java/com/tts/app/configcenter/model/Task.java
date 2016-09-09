@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Task {
     @Id
-    Integer id;
+    Long id;
     String title;
     String description;
     Date dueDate;
@@ -21,19 +21,19 @@ public class Task {
     }
     
 
-    public Task(Integer id, String title, String description) {
+    public Task(Long id, String title, String description) {
         super();
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = new Integer(id);
+    public void setId(Long id) {
+        this.id = new Long(id);
     }
 
     public String getTitle() {

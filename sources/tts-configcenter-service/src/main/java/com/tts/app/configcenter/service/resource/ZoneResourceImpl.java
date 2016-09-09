@@ -9,11 +9,12 @@ import org.ops4j.pax.cdi.api.OsgiService;
 
 import com.tts.app.configcenter.model.zone.Zone;
 import com.tts.app.configcenter.model.zone.ZoneDao;
+import com.tts.app.configcenter.model.zone.ZoneQueryFilter;
 
 @Named
 @Consumes({"application/json", "test/xml"})
 @Produces({"application/json", "test/xml"})
-public class ZoneResourceImpl extends PersistenceResourceImpl<Zone, ZoneDao> {
+public class ZoneResourceImpl extends PersistenceResourceImpl<Zone, ZoneQueryFilter, ZoneDao> {
     
     @OsgiService @Inject
     ZoneDao zoneDao;

@@ -55,7 +55,7 @@ public class TaskResourceImpl {
 
     @PUT
     @Path("/{id}")
-    public void updateTask(@PathParam("id") Integer id, Task task) {
+    public void updateTask(@PathParam("id") Long id, Task task) {
         task.setId(id);
         taskService.updateTask(task);
     }
