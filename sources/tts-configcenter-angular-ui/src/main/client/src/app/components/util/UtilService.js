@@ -1,18 +1,15 @@
 class UtilService {
   /** @ngInject */
-  constructor($log, $http) {
+  constructor($log, $http, dataTranformerService) {
     this.log = $log;
     this.http = $http;
+    this.dataTranformerService = dataTranformerService;
   }
   submitMassCreation(massCreation, callback) {
     this.log.info(`Info ${massCreation.zoneName}, ${massCreation.servers}`);
-    // Transform Data & Make Post request
-    const obj = {
-      massCreation: {
-        zoneName: massCreation.zoneName,
-        servers: massCreation.servers
-      }
-    };
+    // Transform Data
+    const obj = this.dataTranformerService.convertMassCreationFromClientToServer(massCreation);
+    // Make Post request
     const res = this.http.post(`${wsUrl}\/util\/masscreate`, obj);
     res.success((data, status, headers, config) => {
       this.log.info("Request submitted successfully.");

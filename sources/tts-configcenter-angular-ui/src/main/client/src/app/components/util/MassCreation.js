@@ -11,7 +11,7 @@ class MassCreationController {
   }
   handleSubmit() {
     this.utilService.submitMassCreation(this.massCreation, callback => {
-      this.rootScope.$emit('reloadData');
+      this.rootScope.$emit('reloadZoneData');
     });
   }
   handleReset() {

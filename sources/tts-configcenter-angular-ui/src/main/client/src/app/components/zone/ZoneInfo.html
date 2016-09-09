@@ -3,7 +3,7 @@ $(document).ready(function(){
   });
 </script>
 
-<li ng-repeat="zone in $ctrl.zones">
+<li ng-repeat="zone in $ctrl.zoneAndServers">
     <div>
         <div class="collapsible-header active">
             <i class="material-icons">location_city</i>{{zone.zoneName}}
@@ -14,19 +14,7 @@ $(document).ready(function(){
         </div>
         <div class="zone-body">
             <ul class="row">
-                <li class="col l4 m6 s12">
-                    <server-info-summary-component></server-info-summary-component>
-                </li>
-                
-                <li class="col l4 m6 s12">
-                    <server-info-summary-component></server-info-summary-component>
-                </li>
-                
-                <li class="col l4 m6 s12">
-                    <server-info-summary-component></server-info-summary-component>
-                </li>
-                
-                <li class="col l4 m6 s12">
+                <li class="col l4 m6 s12" ng-repeat="server in zone.servers">
                     <server-info-summary-component></server-info-summary-component>
                 </li>
             </ul>

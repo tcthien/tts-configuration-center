@@ -4,25 +4,30 @@ function openServerCreationDlg() {
 
 class ZoneController {
   /** @ngInject */
-  constructor($scope, $log, zoneService, $rootScope) {
+  constructor($scope, $log, $rootScope, zoneService, dataTranformerService, serverService) {
     this.log = $log;
-    this.zoneService = zoneService;
     this.rootScope = $rootScope;
+    this.zoneService = zoneService;
+    this.dataTranformerService = dataTranformerService;
+    this.serverService = serverService;
     // Preload Zone from Server
-    this.loadAllZone();
+    this.reloadAllZone();
     // Register event for reloading new data
-    this.rootScope.$on('reloadData', () => {
-      this.log.debug('invoke reloadData....');
-      this.loadAllZone();
+    this.rootScope.$on('reloadZoneData', () => {
+      this.log.debug('invoke reloadZoneData....');
+      this.reloadAllZone();
     });
     // Unregister listener on root if controller is destroyed
     $scope.$on('$destroy', function () {
-      this.rootScope.$$listeners.reloadData = [];
+      this.rootScope.$$listeners.reloadZoneData = [];
     });
   }
-  loadAllZone() {
+  reloadAllZone() {
     return this.zoneService.loadAllZone(fetchedZones => {
-      this.zones = fetchedZones;
+      // From fetchedZones, we will invoke to server to load server
+      const servers = this.serverService.findByZones(fetchedZones, zoneAndServers => {
+        this.zoneAndServers = zoneAndServers;
+      });
     });
   }
 }
