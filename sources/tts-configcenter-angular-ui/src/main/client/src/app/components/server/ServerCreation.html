@@ -1,48 +1,33 @@
-<!-- 
-<input
-  class="textInput"
-  ng-class="{'edit': $ctrl.editing, 'new-todo': $ctrl.newTodo}"
-  ng-model="$ctrl.text"
-  ng-keypress="$ctrl.handleSubmit($event)"
-  ng-blur="$ctrl.handleBlur()"
-  placeholder="{{$ctrl.placeholder}}"
-  type="text"
-/>
- -->
- <script type="text/javascript">
-$(document).ready(function(){
-    $('.collapsible').collapsible({
-      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
-    
-    $('.modal-trigger').leanModal();
-  });
-</script>
- 
 <div id="serverCreationDlg" class="modal">
     <div class="modal-content tts-cc-modal">
         <h4>Create Server</h4>
         <div class="row tts-cc-formrow">
             <form class="col s12">
+                <input type="hidden" ng-model="$ctrl.data.zoneId" />
                 <div class="row tts-cc-formrow">
                     <div class="input-field col s6">
-                        <input id="form-server_name" type="text" class="validate" placeholder="Your Server Name...">
+                        <input id="form-server_name" type="text" class="validate" placeholder="Your Server Name..." 
+                            ng-model="$ctrl.data.serverName" />
                         <label for="form-server_name" class="active">Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="form-server_ip" type="text" class="validate" placeholder="Your IP Address...">
+                        <input id="form-server_ip" type="text" class="validate" placeholder="Your IP Address..."
+                            ng-model="$ctrl.data.ipAddress" />
                         <label for="form-server_ip" class="active">IP</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="form-server_username" class="active" placeholder="Your User Name..."></input>
+                        <input id="form-server_username" class="active" placeholder="Your User Name..." 
+                            ng-model="$ctrl.data.userName" />
                         <label for="form-server_username" class="active">User Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="form-server_password" class="active" type="password" placeholder="Your Password..."></input>
+                        <input id="form-server_password" class="active" type="password" placeholder="Your Password..." 
+                            ng-model="$ctrl.data.password" />
                         <label for="form-server_password" class="active">Password</label>
                     </div>
                     <div class="input-field col s12">
-                          <textarea id="form-server_description" class="materialize-textarea" placeholder="Your Server's Description..."></textarea>
+                          <textarea id="form-server_description" class="materialize-textarea" placeholder="Your Server's Description..."
+                              ng-model="$ctrl.data.description"></textarea>
                           <label for="form-server_description" class="active">Description</label>
                       </div>
                 </div>
@@ -50,7 +35,7 @@ $(document).ready(function(){
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class=" modal-action waves-effect waves-green btn-flat">Add</a>
+        <a href="#!" class=" modal-action waves-effect waves-green btn-flat" ng-click="$ctrl.addServer()">Add</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Canel</a>
     </div>
 </div>

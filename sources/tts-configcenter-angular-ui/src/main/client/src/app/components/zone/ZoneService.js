@@ -9,7 +9,6 @@ class ZoneService {
     const res = this.http.get(`${wsUrl}\/zone`);
     res.success((data, status, headers, config) => {
       // Log data load from server
-      this.log.debug(`loadAllZone-server: ${JSON.stringify(data)}`);
       callback(this.transformData(data));
     });
     res.error((data, status, headers, config) => {

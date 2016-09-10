@@ -1,21 +1,55 @@
 class ServerService {
   /** @ngInject */
-  constructor($http, $log, dataTranformerService) {
-    this.log = $log;
+  constructor($http, dataTranformerService, loggingService) {
     this.http = $http;
     this.dataTranformerService = dataTranformerService;
+    this.loggingService = loggingService;
   }
+
   findByZones(fetchedZones, callback) {
     const serverQueryFilter = this.dataTranformerService.buildServerQueryFilter(fetchedZones);
     // Make Post request
     const res = this.http.post(`${wsUrl}\/server\/query`, serverQueryFilter);
     res.success((data, status, headers, config) => {
-      this.log.debug("Request submitted successfully.");
       const zoneAndServer = this.dataTranformerService.convertServersFromServerToClient(data);
       callback(zoneAndServer);
     });
     res.error((data, status, headers, config) => {
-      this.log.error(`failure message: ${data}`);
+      this.loggingService.logError(`failure message: ${data}`);
+    });
+  }
+
+  deleteServer(serverId, callback) {
+    this.loggingService.logJson('ServerService', 'deleteServer', serverId);
+    const res = this.http.delete(`${wsUrl}\/server\/${serverId}`);
+    res.success((data, status, headers, config) => {
+      callback();
+    });
+    res.error((data, status, headers, config) => {
+      this.loggingService.logError(`Failure to delete serverId: ${data}`);
+    });
+  }
+
+  addServer(serverData, callback) {
+    const serverObj = {
+      server: {
+        name: serverData.serverName,
+        userName: serverData.userName,
+        password: serverData.password,
+        ipAddress: serverData.ipAddress,
+        description: serverData.description,
+        zone: {
+          id: serverData.zoneId
+        }
+      }
+    };
+    this.loggingService.logJson('ServerService', 'addServer', serverObj);
+    const res = this.http.post(`${wsUrl}\/server`, serverObj);
+    res.success((data, status, headers, config) => {
+      callback();
+    });
+    res.error((data, status, headers, config) => {
+      this.loggingService.logError(`failure message: ${data}`);
     });
   }
 }

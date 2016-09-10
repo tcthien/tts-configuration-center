@@ -1,5 +1,6 @@
 angular
   .module('app', ['ui.router'])
+  .service('loggingService', LoggingService)
   .service('dataTranformerService', DataTranformerService)
   .service('todoService', TodoService)
   .service('utilService', UtilService)

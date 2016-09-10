@@ -20,7 +20,7 @@ class DataTranformerService {
         zoneIds: ids
       }
     };
-    this.log.debug(`DataTranformerService-buildServerQueryFilter: ${JSON.stringify(rs)}`);
+//    this.log.debug(`DataTranformerService-buildServerQueryFilter: ${JSON.stringify(rs)}`);
     return rs;
   }
   convertServersFromServerToClient(fetchedServers) {
@@ -36,8 +36,8 @@ class DataTranformerService {
       if (addedZoneId.indexOf(zoneId) < 0) {
         // Update zone to zoneArray
         const zone = {
-            id: zoneId,
-            zoneName: server.zone.zoneName
+          id: zoneId,
+          zoneName: server.zone.zoneName
         };
         zoneArray.push(zone);
         addedZoneId.push(zoneId);
@@ -51,7 +51,7 @@ class DataTranformerService {
     for (const zone of zoneArray) {
       zone.servers = serverMap[zone.id];
     }
-    this.log.debug(`DataTranformerService-convertServersFromServerToClient: ${JSON.stringify(zoneArray)}`);
+//    this.log.debug(`DataTranformerService-convertServersFromServerToClient: ${JSON.stringify(zoneArray)}`);
     return zoneArray;
   }
   /** Transformer for Zone ------------------------------------------------------------------------ */
@@ -61,7 +61,7 @@ class DataTranformerService {
     for (const zone of zones) {
       rs.push(zone);
     }
-    this.log.debug(`DataTranformerService-convertZoneFromServerToClient: ${JSON.stringify(rs)}`);
+//    this.log.debug(`DataTranformerService-convertZoneFromServerToClient: ${JSON.stringify(rs)}`);
     return rs;
   }
   /** Util method --------------------------------------------------------------------------------- */
@@ -70,7 +70,7 @@ class DataTranformerService {
     for (const zone of fetchedZones) {
       rs.push(zone.id);
     }
-    this.log.debug(`DataTranformerService-getZoneIds: ${JSON.stringify(rs)}`);
+//    this.log.debug(`DataTranformerService-getZoneIds: ${JSON.stringify(rs)}`);
     return rs;
   }
 }

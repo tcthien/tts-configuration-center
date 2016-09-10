@@ -1,13 +1,11 @@
-<script type="text/javascript">
-$(document).ready(function(){
-  });
-</script>
-
+<!-- Server Creation Dialog -->
+<create-server-component></create-server-component>
 <li ng-repeat="zone in $ctrl.zoneAndServers">
     <div>
         <div class="collapsible-header active">
             <i class="material-icons">location_city</i>{{zone.zoneName}}
-            <i class="material-icons right" title="Add More Server" onclick="openServerCreationDlg()">add</i>
+            <i class="material-icons right" title="Add More Server"
+                ng-click="$ctrl.openServerCreationDlg(zone.id)">add</i>
             <!-- 
             <i class="material-icons right" title="Install Feature">system_update_alt</i>
              -->
