@@ -8,24 +8,26 @@ class ZoneController {
     this.serverService = serverService;
     this.scope = $scope;
 
-    // Preload Zone from Server
-    this.reloadAllZone();
     // Register event for reloading new data
     this.rootScope.$on('reloadZoneData', () => {
       this.reloadAllZone();
     });
     // Unregister listener on root if controller is destroyed
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', () => {
       this.rootScope.$$listeners.reloadZoneData = [];
     });
   }
 
-  reloadAllZone() {
-    return this.zoneService.loadAllZone(fetchedZones => {
-      // From fetchedZones, we will invoke to server to load server
-      const servers = this.serverService.findByZones(fetchedZones, zoneAndServers => {
-        this.zoneAndServers = zoneAndServers;
-      });
+  loadZones(zoneId) {
+    return this.zoneService.loadZones(zoneId, fetchedZones => {
+      this.loadServerByZone(fetchedZones);
+    });
+  }
+
+  loadServerByZone(fetchedZones) {
+    // From fetchedZones, we will invoke to server to load server
+    const servers = this.serverService.findByZones(fetchedZones, zoneAndServers => {
+      this.zoneAndServers = zoneAndServers;
     });
   }
 

@@ -1,6 +1,4 @@
-<!-- Server Creation Dialog -->
-<create-server-component></create-server-component>
-<ul ng-init="$ctrl.loadZones(null)">
+<ul ng-init="$ctrl.loadZones($ctrl.zoneId)">
     <li ng-repeat="zone in $ctrl.zoneAndServers">
         <div>
             <div class="collapsible-header active">

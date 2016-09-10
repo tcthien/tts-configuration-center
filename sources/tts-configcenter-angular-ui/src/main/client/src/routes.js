@@ -5,11 +5,19 @@ angular
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/home');
 
   $stateProvider
-    .state('app', {
-      url: '/',
-      template: '<app></app>'
+    .state('home', {
+      url: '/home',
+      template: '<home-page></home-page>'
+    })
+    .state('server', {
+      url: '/zone-{zoneId}/server-{serverId}',
+      template: '<server-page></server-page>'
+    })
+    .state('about', {
+      url: '/about',
+      template: '<about-page></about-page>'
     });
 }

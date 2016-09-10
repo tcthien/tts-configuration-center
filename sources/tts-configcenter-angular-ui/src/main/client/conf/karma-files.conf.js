@@ -15,6 +15,7 @@ module.exports = function listFiles() {
     conf.path.tmp('app/components/*/*Service.js'),
     conf.path.tmp('index.js'),
     conf.path.tmp('app/components/*/*Controller.js'),
+    conf.path.tmp('app/containers/*Controller.js'),
     conf.path.tmp('app/components/*/*.js'),
     conf.path.tmp('app/layout/*.js'),
     conf.path.tmp('app/containers/*.js'),

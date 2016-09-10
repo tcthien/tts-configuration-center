@@ -8,6 +8,7 @@ class ServerService {
 
   findByZones(fetchedZones, callback) {
     const serverQueryFilter = this.dataTranformerService.buildServerQueryFilter(fetchedZones);
+    this.loggingService.logJson('ServerService', 'findByZones', serverQueryFilter);
     // Make Post request
     const res = this.http.post(`${wsUrl}\/server\/query`, serverQueryFilter);
     res.success((data, status, headers, config) => {

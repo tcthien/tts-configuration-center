@@ -2,7 +2,7 @@
     <div class="card-content">
         <span class="card-title activator ">{{$ctrl.server.serverName}}</span>
         <ul>
-            <li>{{$ctrl.server.ipAddress}}</li>
+            <li><a ui-sref="server({ zoneId: $ctrl.server.zone.id, serverId: $ctrl.server.id })">{{$ctrl.server.ipAddress}}</a></li>
             <li>User Name: {{$ctrl.server.userName}}</li>
         </ul>
     </div>

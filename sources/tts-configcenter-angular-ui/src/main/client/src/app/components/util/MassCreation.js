@@ -5,8 +5,8 @@ class MassCreationController {
     this.utilService = utilService;
     this.rootScope = $rootScope;
     this.massCreation = {
-      zoneName: 'Your Zone Name',
-      servers: 'Name, IP Address, user name, password, Description'
+//      zoneName: 'Your Zone Name',
+//      servers: 'Server Name, IP Address, user name, password, Description'
     };
   }
   handleSubmit() {

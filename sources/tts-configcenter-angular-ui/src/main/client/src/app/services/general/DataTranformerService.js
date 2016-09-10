@@ -1,7 +1,7 @@
 class DataTranformerService {
   /** @ngInject */
-  constructor($log) {
-    this.log = $log;
+  constructor(loggingService) {
+    this.loggingService = loggingService;
   }
   /** Transformer for MassCreation ---------------------------------------------------------------- */
   convertMassCreationFromClientToServer(massCreation) {
@@ -70,7 +70,7 @@ class DataTranformerService {
     for (const zone of fetchedZones) {
       rs.push(zone.id);
     }
-//    this.log.debug(`DataTranformerService-getZoneIds: ${JSON.stringify(rs)}`);
+    this.loggingService.logJson('DataTranformerService', 'getZoneIds', fetchedZones);
     return rs;
   }
 }

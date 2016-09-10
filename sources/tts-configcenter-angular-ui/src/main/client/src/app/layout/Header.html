@@ -1,22 +1,9 @@
-<!-- 
-<header class="header">
-  <h1>todos</h1>
-  <todo-text-input
-    new-todo="true"
-    on-save="$ctrl.handleSave(text)"
-    placeholder="What needs to be done?"
-  ></todo-text-input>
-</header>
- -->
- 
 <nav>
     <div class="nav-wrapper tts-nav-header">
       <a href="#" class="brand-logo">Configuration Center</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li class="active"><a href="sass.html">Zone & Server</a></li>
-        <!-- 
-        <li><a href="badges.html">Feature</a></li> -->
-        <li><a href="collapsible.html">About</a></li>
+        <li ui-sref-active="active"><a ui-sref="home">Zone & Server</a></li>
+        <li ui-sref-active="active"><a ui-sref="about">About</a></li>
       </ul>
     </div>
 </nav>

@@ -6,7 +6,7 @@ class ServerController {
     this.serverService = serverService;
     this.rootScope = $rootScope;
     // Unregister listener on root if controller is destroyed
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', () => {
       this.serverCreationInfo = {};
     });
     this.data = {};
