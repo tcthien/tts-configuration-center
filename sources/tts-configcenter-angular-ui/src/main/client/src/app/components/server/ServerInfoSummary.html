@@ -1,9 +1,9 @@
 <div class="card">
     <div class="card-content">
-        <span class="card-title activator ">Configuration Server</span>
+        <span class="card-title activator ">{{$ctrl.server.serverName}}</span>
         <ul>
-            <li>IP: 192.100.100</li>
-            <li>User Name: tcthien</li>
+            <li>{{$ctrl.server.ipAddress}}</li>
+            <li>User Name: {{$ctrl.server.userName}}</li>
         </ul>
     </div>
     <div class="card-action">
@@ -13,6 +13,6 @@
 
     <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
-        <p><i>This server will contains configuration for TMA SO system</i></p>
+        <p><i>{{$ctrl.server.description}}</i></p>
     </div>
 </div>

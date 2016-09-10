@@ -10,7 +10,7 @@ class ServerService {
     // Make Post request
     const res = this.http.post(`${wsUrl}\/server\/query`, serverQueryFilter);
     res.success((data, status, headers, config) => {
-      this.log.info("Request submitted successfully.");
+      this.log.debug("Request submitted successfully.");
       const zoneAndServer = this.dataTranformerService.convertServersFromServerToClient(data);
       callback(zoneAndServer);
     });

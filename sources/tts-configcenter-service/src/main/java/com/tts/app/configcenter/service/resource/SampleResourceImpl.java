@@ -27,17 +27,52 @@ public class SampleResourceImpl {
     
     @POST
     public void initSampleData() {
-        Zone zone1 = new Zone(1L, "Demo Zone");
+        Zone zone1 = new Zone(1L, "Ubuntu Zone");
         zoneDao.add(zone1);
-        zoneDao.add(new Zone(2L, "TMA Zone"));
-        zoneDao.add(new Zone(3L, "Home Zone"));
+        Zone zone2 = new Zone(2L, "Dev Zone");
+        zoneDao.add(zone2);
+        zoneDao.add(new Zone(3L, "Test Zone"));
         
+        // Zone 1--------------------------------------------------------------
         Server server = new Server();
         server.setIpAddress("192.168.100.100");
         server.setUserName("tcthien");
         server.setPassword("tcthien");
         server.setServerName("Ubuntu DEV");
         server.setZone(zone1);
+        serverDao.add(server);
+        
+        server = new Server();
+        server.setIpAddress("192.168.100.100");
+        server.setUserName("tcthien");
+        server.setPassword("tcthien");
+        server.setServerName("Ubuntu Server 2");
+        server.setZone(zone1);
+        serverDao.add(server);
+        
+        server = new Server();
+        server.setIpAddress("192.168.100.100");
+        server.setUserName("tcthien");
+        server.setPassword("tcthien");
+        server.setServerName("Ubuntu Server 3");
+        server.setZone(zone1);
+        serverDao.add(server);
+        
+        // Zone 2--------------------------------------------------------------
+        server = new Server();
+        server.setIpAddress("192.168.100.100");
+        server.setUserName("tcthien");
+        server.setPassword("tcthien");
+        server.setServerName("Dev Server 1");
+        server.setZone(zone2);
+        serverDao.add(server);
+        
+        server = new Server();
+        server.setIpAddress("192.168.100.100");
+        server.setUserName("tcthien");
+        server.setPassword("tcthien");
+        server.setServerName("Dev Server 2");
+        server.setZone(zone2);
         serverDao.add(server);
     }
 

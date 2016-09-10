@@ -24,23 +24,29 @@ class DataTranformerService {
     return rs;
   }
   convertServersFromServerToClient(fetchedServers) {
+    const addedZoneId = [];
     // zoneArray
     const zoneArray = [];
     // Key: zoneId, value: server arrays
     const serverMap = [];
     const servers = fetchedServers.server;
     for (const server of servers) {
-      // Update zone to zoneArray
-      const zone = {
-        id: server.zone.id,
-        zoneName: server.zone.zoneName
-      };
-      zoneArray.push(zone);
-      // Update server to serverMap
-      if (serverMap[zone.id] === null || serverMap[zone.id] === undefined) {
-        serverMap[zone.id] = [];
+      // Current Zone Id
+      const zoneId = server.zone.id;
+      if (addedZoneId.indexOf(zoneId) < 0) {
+        // Update zone to zoneArray
+        const zone = {
+            id: zoneId,
+            zoneName: server.zone.zoneName
+        };
+        zoneArray.push(zone);
+        addedZoneId.push(zoneId);
       }
-      serverMap[zone.id].push(server);
+      // Update server to serverMap
+      if (serverMap[zoneId] === null || serverMap[zoneId] === undefined) {
+        serverMap[zoneId] = [];
+      }
+      serverMap[zoneId].push(server);
     }
     for (const zone of zoneArray) {
       zone.servers = serverMap[zone.id];

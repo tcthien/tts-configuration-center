@@ -13,7 +13,7 @@
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=configcenter)</non-jta-data-source>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 
