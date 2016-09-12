@@ -7,5 +7,6 @@ angular
     templateUrl: 'app/layout/Header.html',
     controller: Header,
     bindings: {
+      component: '<'
     }
   });
