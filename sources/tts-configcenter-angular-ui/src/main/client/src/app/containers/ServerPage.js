@@ -30,12 +30,16 @@ class ServerPageController {
         this.zoneAndServers = zoneAndServers;
         this.zone = zoneAndServers[0];
         for (const server of this.zone.servers) {
-          if(server.id == serverId) {
+          if (server.id == serverId) {
             this.server = server;
           }
         }
       });
     });
+  }
+
+  openServerCreationDlgForEdit() {
+    $('#serverCreationDlg').openModal();
   }
 }
 

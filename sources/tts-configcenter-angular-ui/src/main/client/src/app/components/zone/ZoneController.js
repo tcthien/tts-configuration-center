@@ -12,7 +12,7 @@ class ZoneController {
 
     // Register event for reloading new data
     this.rootScope.$on('reloadZoneData', () => {
-      if(this.allZone) {
+      if (this.allZone) {
         this.loadZones(null);
       } else {
         // In this case, data was loaded from ServerPageController so notify the listener

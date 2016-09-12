@@ -12,7 +12,7 @@ $(document).ready(function(){
     </div>
   </nav>
 <!-- Server Creation Dialog -->
-<create-server-component></create-server-component>
+<create-server-component parent="'ServerPage'" server="$ctrl.server" zone="$ctrl.zone" />
 <!-- Page Layout here -->
 <div class="section">
     <div class="container">
@@ -27,7 +27,8 @@ $(document).ready(function(){
                         <div>
                             <div class="collapsible-header active server-header">
                                 <i class="material-icons">info_outline</i><b>{{$ctrl.server.serverName}}</b>
-                                <i class="material-icons right" title="Add More Server">mode_edit</i>
+                                <i class="material-icons right" title="Add More Server"
+                                    ng-click="$ctrl.openServerCreationDlgForEdit()">mode_edit</i>
                             </div>
                             <div class="tts-server-body">
                                 <ul class="row tts-server-info-row">

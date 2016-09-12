@@ -11,6 +11,12 @@ class ZoneInfoLeftController extends ZoneController {
       this.scope.serverId = $stateParams.serverId;
     }
   }
+
+  deleteSelectedServer(serverId) {
+    this.serverService.deleteServer(serverId, () => {
+      this.rootScope.$emit('reloadZoneInfoLeft');
+    });
+  }
 }
 
 angular

@@ -35,6 +35,7 @@ class ServerService {
   addServer(serverData, callback) {
     const serverObj = {
       server: {
+        id: serverData.serverId,
         serverName: serverData.serverName,
         userName: serverData.userName,
         password: serverData.password,

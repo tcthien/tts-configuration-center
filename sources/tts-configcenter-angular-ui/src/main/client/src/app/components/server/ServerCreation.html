@@ -3,31 +3,30 @@
         <h4>Create Server</h4>
         <div class="row tts-cc-formrow">
             <form class="col s12">
-                <input type="hidden" ng-model="$ctrl.data.zoneId" />
                 <div class="row tts-cc-formrow">
                     <div class="input-field col s6">
                         <input id="form-server_name" type="text" class="validate" placeholder="Your Server Name..." 
-                            ng-model="$ctrl.data.serverName" />
+                            ng-model="$ctrl.server.serverName" />
                         <label for="form-server_name" class="active">Name</label>
                     </div>
                     <div class="input-field col s6">
                         <input id="form-server_ip" type="text" class="validate" placeholder="Your IP Address..."
-                            ng-model="$ctrl.data.ipAddress" />
+                            ng-model="$ctrl.server.ipAddress" />
                         <label for="form-server_ip" class="active">IP</label>
                     </div>
                     <div class="input-field col s6">
                         <input id="form-server_username" class="active" placeholder="Your User Name..." 
-                            ng-model="$ctrl.data.userName" />
+                            ng-model="$ctrl.server.userName" />
                         <label for="form-server_username" class="active">User Name</label>
                     </div>
                     <div class="input-field col s6">
                         <input id="form-server_password" class="active" type="password" placeholder="Your Password..." 
-                            ng-model="$ctrl.data.password" />
+                            ng-model="$ctrl.server.password" />
                         <label for="form-server_password" class="active">Password</label>
                     </div>
                     <div class="input-field col s12">
                           <textarea id="form-server_description" class="materialize-textarea" placeholder="Your Server's Description..."
-                              ng-model="$ctrl.data.description"></textarea>
+                              ng-model="$ctrl.server.description"></textarea>
                           <label for="form-server_description" class="active">Description</label>
                       </div>
                 </div>
@@ -35,7 +34,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class=" modal-action waves-effect waves-green btn-flat" ng-click="$ctrl.addServer()">Add</a>
+        <a href="#!" class=" modal-action waves-effect waves-green btn-flat" ng-click="$ctrl.addServer()">Save</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Canel</a>
     </div>
 </div>

@@ -15,7 +15,7 @@ class ServerController {
   isSimpleMode() {
     return this.parentScope.simpleMode;
   }
-  
+
   isSelectedServer(serverId) {
     return this.rootScope.serverId == serverId;
   }
@@ -24,25 +24,5 @@ class ServerController {
     this.serverService.deleteServer(serverId, () => {
       this.rootScope.$emit('reloadZoneData');
     });
-  }
-
-  addServer() {
-    this.data.zoneId = this.rootScope.selectedZoneId;
-    this.serverService.addServer(this.data, () => {
-      // FIXME: plz fix to reload only appropriated zone
-      this.reset();
-      $('#serverCreationDlg').closeModal();
-      this.rootScope.$emit('reloadZoneData');
-    });
-  }
-
-  reset() {
-    this.data = {
-      serverName: '',
-      userName: '',
-      password: '',
-      ipAddress: '',
-      description: ''
-    };
   }
 }
