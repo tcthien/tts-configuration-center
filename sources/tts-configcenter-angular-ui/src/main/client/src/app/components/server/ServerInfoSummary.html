@@ -1,10 +1,12 @@
 <div class="card" ng-if="!$ctrl.isSimpleMode()">
     <!-- This will be displayed in normal mode -->
     <div class="card-content">
-        <span class="card-title activator ">{{$ctrl.server.serverName}}</span>
+        <a ui-sref="server({ zoneId: $ctrl.server.zone.id, serverId: $ctrl.server.id })">
+            <span class="card-title ">{{$ctrl.server.serverName}}</span>
+        </a>
         <ul>
-            <li><a ui-sref="server({ zoneId: $ctrl.server.zone.id, serverId: $ctrl.server.id })">{{$ctrl.server.ipAddress}}</a></li>
-            <li>User Name: {{$ctrl.server.userName}}</li>
+            <li class="activator" title="Click to see description">{{$ctrl.server.ipAddress}}</li>
+            <li class="activator" title="Click to see description">User Name: {{$ctrl.server.userName}}</li>
         </ul>
     </div>
     <div class="card-action tts-card-action">

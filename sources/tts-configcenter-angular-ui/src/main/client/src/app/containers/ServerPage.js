@@ -9,7 +9,7 @@ class ServerPageController {
     this.stateParams = $stateParams;
     // URL Params
     if ($stateParams !== null) {
-      this.stateParams = $stateParams;
+      this.rootScope.serverId = $stateParams.serverId;
       this.initialize($stateParams.zoneId, $stateParams.serverId);
     }
 
@@ -20,6 +20,7 @@ class ServerPageController {
     // Unregister listener on root if controller is destroyed
     $scope.$on('$destroy', () => {
       this.rootScope.$$listeners.reloadZoneInfoLeft = [];
+      this.rootScope.serverId = null;
     });
   }
 

@@ -17,7 +17,7 @@ class ServerController {
   }
   
   isSelectedServer(serverId) {
-    return this.parentScope.serverId == serverId;
+    return this.rootScope.serverId == serverId;
   }
 
   deleteServer(serverId) {
