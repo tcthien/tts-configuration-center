@@ -4,6 +4,7 @@ angular
     templateUrl: 'app/components/server/ServerInfoSummary.html',
     controller: ServerController,
     bindings: {
-      server: '<'
+      server: '<',
+      simpleMode: '<'
     }
   });

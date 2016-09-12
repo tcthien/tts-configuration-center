@@ -5,8 +5,10 @@ class ZoneInfoLeftController extends ZoneController {
     this.serverId = '';
     this.zoneId = '';
     // URL Params
-    this.serverId = $stateParams.serverId;
-    this.zoneId = $stateParams.zoneId;
+    if ($stateParams !== null) {
+      this.zoneId = $stateParams.zoneId;
+      this.scope.serverId = $stateParams.serverId;
+    }
   }
 }
 

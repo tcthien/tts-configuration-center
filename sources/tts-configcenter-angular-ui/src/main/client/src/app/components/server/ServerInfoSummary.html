@@ -1,4 +1,5 @@
-<div class="card">
+<div class="card" ng-if="!$ctrl.isSimpleMode()">
+    <!-- This will be displayed in normal mode -->
     <div class="card-content">
         <span class="card-title activator ">{{$ctrl.server.serverName}}</span>
         <ul>
@@ -6,13 +7,23 @@
             <li>User Name: {{$ctrl.server.userName}}</li>
         </ul>
     </div>
-    <div class="card-action">
-        <a href="#">Install</a>
-        <a href="#" class="right" ng-click="$ctrl.deleteServer($ctrl.server.id)">Remove</a>
+    <div class="card-action tts-card-action">
+        <a href="#"><i class="material-icons">playlist_add</i></a>
+        <a href="#" ng-click="$ctrl.deleteServer($ctrl.server.id)"><i class="material-icons">remove_circle</i></a>
     </div>
 
     <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
         <p><i>{{$ctrl.server.description}}</i></p>
+    </div>
+</div>
+<div ng-if="$ctrl.isSimpleMode()"
+    class="card tts-card-simple {{$ctrl.isSelectedServer($ctrl.server.id) ? 'grey lighten-3' : ''}}">
+    <!-- This will be displayed in simple mode -->
+    <div class="card-content">
+        <a ui-sref="server({ zoneId: $ctrl.server.zone.id, serverId: $ctrl.server.id })"><span class="card-title">{{$ctrl.server.serverName}}</span></a>
+        <ul>
+            <li>{{$ctrl.server.ipAddress}}</li>
+        </ul>
     </div>
 </div>

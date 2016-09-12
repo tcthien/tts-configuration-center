@@ -18,6 +18,14 @@ class ZoneController {
     });
   }
 
+  showSimpleMode() {
+    this.scope.simpleMode = true;
+  }
+
+  showNormalMode() {
+    this.scope.simpleMode = false;
+  }
+
   loadZones(zoneId) {
     return this.zoneService.loadZones(zoneId, fetchedZones => {
       this.loadServerByZone(fetchedZones);

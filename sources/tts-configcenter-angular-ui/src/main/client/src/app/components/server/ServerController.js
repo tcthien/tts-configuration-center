@@ -12,6 +12,15 @@ class ServerController {
     this.data = {};
   }
 
+  isSimpleMode() {
+    return this.parentScope.simpleMode;
+  }
+  
+  isSelectedServer(serverId) {
+    this.log.debug(`${this.parentScope.serverId} ------------------- ${serverId}`);
+    return this.parentScope.serverId == serverId;
+  }
+
   deleteServer(serverId) {
     this.serverService.deleteServer(serverId, () => {
       this.rootScope.$emit('reloadZoneData');
