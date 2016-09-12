@@ -1,17 +1,17 @@
-<ul ng-init="$ctrl.loadZones($ctrl.zoneId);">
-    <li ng-repeat="zone in $ctrl.zoneAndServers">
+<ul>
+    <li>
         <div>
             <div class="collapsible-header active">
-                <i class="material-icons">location_city</i><b>{{zone.zoneName}}</b>
+                <i class="material-icons">location_city</i><b>{{$ctrl.zone.zoneName}}</b>
                 <i class="material-icons right" title="Add More Server"
-                    ng-click="$ctrl.openServerCreationDlg(zone.id)">add</i>
+                    ng-click="$ctrl.openServerCreationDlg($ctrl.zone.id)">add</i>
                 <!-- 
                 <i class="material-icons right" title="Install Feature">system_update_alt</i>
                  -->
             </div>
             <div class="zone-body">
                 <ul class="row">
-                    <li class="col l12 m12 12" ng-repeat="server in zone.servers">
+                    <li class="col l12 m12 12" ng-repeat="server in $ctrl.zone.servers">
                         <server-info-summary-component server="server" ng-init="$ctrl.showSimpleMode()" />
                     </li>
                 </ul>

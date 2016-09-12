@@ -13,6 +13,7 @@ class ServerService {
     const res = this.http.post(`${wsUrl}\/server\/query`, serverQueryFilter);
     res.success((data, status, headers, config) => {
       const zoneAndServer = this.dataTranformerService.convertServersFromServerToClient(data);
+      this.loggingService.logJson('ServerService', 'findByZones', zoneAndServer);
       callback(zoneAndServer);
     });
     res.error((data, status, headers, config) => {
@@ -34,7 +35,7 @@ class ServerService {
   addServer(serverData, callback) {
     const serverObj = {
       server: {
-        name: serverData.serverName,
+        serverName: serverData.serverName,
         userName: serverData.userName,
         password: serverData.password,
         ipAddress: serverData.ipAddress,

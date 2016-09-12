@@ -6,9 +6,9 @@ $(document).ready(function(){
 <header-component component="'zoneAndServer'"></header-component>
 <nav class="tts-breadcrumb">
     <div class="nav-wrapper">
-        <a href="#!" class="breadcrumb">Zone & Server</a>
-        <a href="#!" class="breadcrumb">Zone 1</a>
-        <a href="#!" class="breadcrumb">Server 1</a>
+        <a ui-sref="home" class="breadcrumb">Zone & Server</a>
+        <a href="#" class="breadcrumb">{{$ctrl.zone.zoneName}}</a>
+        <a href="#" class="breadcrumb">{{$ctrl.server.serverName}}</a>
     </div>
   </nav>
 <!-- Server Creation Dialog -->
@@ -18,7 +18,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="row">
             <div class="mass-creation col m3 s12">
-                <zone-info-left-component></zone-info-left-component>
+                <zone-info-left-component zone="$ctrl.zone"></zone-info-left-component>
             </div>
             
             <div class="col m9 s12">
@@ -26,25 +26,25 @@ $(document).ready(function(){
                     <li>
                         <div>
                             <div class="collapsible-header active server-header">
-                                <i class="material-icons">info_outline</i><b>Server Name</b>
+                                <i class="material-icons">info_outline</i><b>{{$ctrl.server.serverName}}</b>
                                 <i class="material-icons right" title="Add More Server">mode_edit</i>
                             </div>
                             <div class="tts-server-body">
                                 <ul class="row tts-server-info-row">
                                     <li class="col l2 m2 2 label">IP Address</li>
-                                    <li class="col l10 m10 10 left value">192.168.100.100</li>
+                                    <li class="col l10 m10 10 left value">{{$ctrl.server.ipAddress}}</li>
                                 </ul>
                                 <ul class="row tts-server-info-row">
                                     <li class="col l2 m2 2 label">User Name</li>
-                                    <li class="col l10 m10 10 left value">tcthien</li>
+                                    <li class="col l10 m10 10 left value">{{$ctrl.server.userName}}</li>
                                 </ul>
                                 <ul class="row tts-server-info-row">
                                     <li class="col l2 m2 2 label">Password</li>
-                                    <li class="col l10 m10 10 left value">tcthien</li>
+                                    <li class="col l10 m10 10 left value">{{$ctrl.server.password}}</li>
                                 </ul>
                                 <ul class="row tts-server-info-row">
                                     <li class="col l2 m2 2 label">Description</li>
-                                    <li class="col l10 m10 10 left value">This is description</li>
+                                    <li class="col l10 m10 10 left value">{{$ctrl.server.description}}</li>
                                 </ul>
                                 <ul class="row tts-server-info-row">
                                     <li class="col l12 m12 12 label">

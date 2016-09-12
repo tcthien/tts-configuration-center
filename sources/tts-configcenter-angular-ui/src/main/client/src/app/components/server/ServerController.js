@@ -17,7 +17,6 @@ class ServerController {
   }
   
   isSelectedServer(serverId) {
-    this.log.debug(`${this.parentScope.serverId} ------------------- ${serverId}`);
     return this.parentScope.serverId == serverId;
   }
 
@@ -28,7 +27,7 @@ class ServerController {
   }
 
   addServer() {
-    this.data.zoneId = this.parentScope.selectedZoneId;
+    this.data.zoneId = this.rootScope.selectedZoneId;
     this.serverService.addServer(this.data, () => {
       // FIXME: plz fix to reload only appropriated zone
       this.reset();

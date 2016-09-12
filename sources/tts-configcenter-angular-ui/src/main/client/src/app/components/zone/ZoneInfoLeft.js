@@ -1,9 +1,10 @@
 class ZoneInfoLeftController extends ZoneController {
   /** @ngInject */
-  constructor($scope, $log, $rootScope, zoneService, dataTranformerService, serverService, $stateParams) {
-    super($scope, $log, $rootScope, zoneService, dataTranformerService, serverService);
+  constructor($scope, $log, $rootScope, zoneService, dataTranformerService, serverService, $stateParams, loggingService) {
+    super($scope, $log, $rootScope, zoneService, dataTranformerService, serverService, loggingService);
     this.serverId = '';
     this.zoneId = '';
+    this.allZone = false;
     // URL Params
     if ($stateParams !== null) {
       this.zoneId = $stateParams.zoneId;
@@ -16,5 +17,8 @@ angular
   .module('app')
   .component('zoneInfoLeftComponent', {
     templateUrl: 'app/components/zone/ZoneInfoLeft.html',
-    controller: ZoneInfoLeftController
+    controller: ZoneInfoLeftController,
+    bindings: {
+      zone: '<'
+    }
   });

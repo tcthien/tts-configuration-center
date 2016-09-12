@@ -1,20 +1,28 @@
 class ZoneController {
   /** @ngInject */
-  constructor($scope, $log, $rootScope, zoneService, dataTranformerService, serverService) {
+  constructor($scope, $log, $rootScope, zoneService, dataTranformerService, serverService, loggingService) {
     this.log = $log;
     this.rootScope = $rootScope;
     this.zoneService = zoneService;
     this.dataTranformerService = dataTranformerService;
+    this.loggingService = loggingService;
     this.serverService = serverService;
     this.scope = $scope;
+    this.allZone = true;
 
     // Register event for reloading new data
     this.rootScope.$on('reloadZoneData', () => {
-      this.reloadAllZone();
+      if(this.allZone) {
+        this.loadZones(null);
+      } else {
+        // In this case, data was loaded from ServerPageController so notify the listener
+        this.rootScope.$emit('reloadZoneInfoLeft');
+      }
     });
     // Unregister listener on root if controller is destroyed
     $scope.$on('$destroy', () => {
       this.rootScope.$$listeners.reloadZoneData = [];
+      this.rootScope.selectedZoneId = null;
     });
   }
 
@@ -40,7 +48,8 @@ class ZoneController {
   }
 
   openServerCreationDlg(zoneId) {
-    this.scope.selectedZoneId = zoneId;
+    this.rootScope.selectedZoneId = zoneId;
+    this.loggingService.logJson('ZoneController', 'openServerCreationDlg', zoneId);
     $('#serverCreationDlg').openModal();
   }
 }
