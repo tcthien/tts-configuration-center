@@ -5,5 +5,6 @@ angular
   .service('todoService', TodoService)
   .service('utilService', UtilService)
   .service('zoneService', ZoneService)
+  .service('featureService', FeatureService)
   .service('serverService', ServerService);
 

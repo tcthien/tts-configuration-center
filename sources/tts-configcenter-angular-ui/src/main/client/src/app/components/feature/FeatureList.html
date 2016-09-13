@@ -1,0 +1,49 @@
+<script>
+$(document).ready(function(){
+  $('ul.tabs').tabs();
+});
+</script>
+<ul class="row tts-server-info-row">
+    <li class="col l12 m12 12 label">
+        <ul class="tabs">
+            <li class="tab col s3"><a class="active" href="#featureContainter">Features</a></li>
+            <li class="tab col s3"><a class="active" href="#commandContainter">Commands</a></li>
+            <li class="tab col s3"><a href="#consoleContainer">Console</a></li>
+        </ul>
+        <!-- Feature TAB -->
+        <div id="featureContainter" class="col s12">
+            <table id="featureTable" class="striped">
+                <thead>
+                  <tr>
+                      <th data-field="featureName">Name</th>
+                      <th data-field="status">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="feature in $ctrl.features">
+                    <td>
+                        {{feature.name}}
+                        <i class="material-icons material-icons-green" ng-if="feature.status" title="Feature is already installed">check_circle</i>
+                    </td>
+                    <td>
+                        <i class="material-icons material-icons-red" ng-if="feature.status" title="Click to remove feature"
+                            ng-click="$ctrl.uninstallFeature($ctrl.parentScope.server, feature)">remove_circle</i>
+                        <i class="material-icons material-icons-blue" ng-if="!feature.status" title="Click to install feature"
+                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- SSH Console -->
+        <div id="commandContainter" class="col s12">
+            
+        </div>
+        
+        <!-- SSH Console -->
+        <div id="consoleContainer" class="col s12">
+            
+        </div>
+    </li>
+</ul>

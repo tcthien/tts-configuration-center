@@ -1,11 +1,12 @@
 class ServerPageController {
   /** @ngInject */
-  constructor($rootScope, $scope, $stateParams, loggingService, zoneService, serverService) {
+  constructor($rootScope, $scope, $stateParams, loggingService, zoneService, serverService, featureService) {
     this.rootScope = $rootScope;
     this.scope = $scope;
     this.loggingService = loggingService;
     this.zoneService = zoneService;
     this.serverService = serverService;
+    this.featureService = featureService;
     this.stateParams = $stateParams;
     // URL Params
     if ($stateParams !== null) {
@@ -17,24 +18,43 @@ class ServerPageController {
     this.rootScope.$on('reloadZoneInfoLeft', () => {
       this.initialize(this.stateParams.zoneId, this.stateParams.serverId);
     });
+    this.rootScope.$on('reloadFeatures', () => {
+      this.reloadFeatures(this.server);
+    });
     // Unregister listener on root if controller is destroyed
     $scope.$on('$destroy', () => {
       this.rootScope.$$listeners.reloadZoneInfoLeft = [];
+      this.rootScope.$$listeners.reloadFeatures = [];
       this.rootScope.serverId = null;
     });
   }
 
   initialize(zoneId, serverId) {
-    return this.zoneService.loadZones(zoneId, fetchedZones => {
+    this.zoneService.loadZones(zoneId, fetchedZones => {
+      // loadZones success -> going to load server
       this.serverService.findByZones(fetchedZones, zoneAndServers => {
+        // loadServer success -> update selected server
         this.zoneAndServers = zoneAndServers;
         this.zone = zoneAndServers[0];
         for (const server of this.zone.servers) {
           if (server.id == serverId) {
             this.server = server;
+            this.scope.server = server;
+            this.reloadFeatures(this.server);
+            break;
           }
         }
+        
       });
+    });
+  }
+
+  reloadFeatures(server) {
+    // If finding server -> load features
+    this.loggingService.logDebug('Prepare to load Feature ----------------------------------------------------');
+    this.loggingService.logJson('ServerPageController', 'loadFeatures-For', server);
+    this.featureService.loadByServer(server, features => {
+      this.features = features;
     });
   }
 
