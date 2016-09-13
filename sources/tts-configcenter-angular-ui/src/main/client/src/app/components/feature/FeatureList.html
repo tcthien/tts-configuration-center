@@ -38,7 +38,43 @@ $(document).ready(function(){
         
         <!-- SSH Console -->
         <div id="commandContainter" class="col s12">
-            
+            <table id="commandTable" class="striped">
+                <thead>
+                  <tr>
+                      <th data-field="featureName">Name</th>
+                      <th data-field="status">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                        TMA SO - Start MQTT Server
+                    </td>
+                    <td>
+                        <i class="material-icons material-icons-blue" title="Click to install feature"
+                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TMA SO - Start OpenHAB Server
+                    </td>
+                    <td>
+                        <i class="material-icons material-icons-blue" title="Click to install feature"
+                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TMA SO - Start All
+                    </td>
+                    <td>
+                        <i class="material-icons material-icons-blue" title="Click to install feature"
+                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
         </div>
         
         <!-- SSH Console -->

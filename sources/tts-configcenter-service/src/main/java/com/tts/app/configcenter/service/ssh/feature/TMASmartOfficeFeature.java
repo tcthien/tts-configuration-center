@@ -22,7 +22,7 @@ public class TMASmartOfficeFeature extends BasicFeature {
     
     @Override
     public boolean check(Server server) throws Exception {
-        SSHResult rs = new SimpleCommand("~/tma-so-software/version.sh").execute(executor, server);
+        SSHResult rs = new SimpleCommand("~/tma-so-software/sources/version.sh").execute(executor, server);
         return rs.getOutputText().contains("TMA Smart Office");
     }
     
@@ -51,7 +51,8 @@ public class TMASmartOfficeFeature extends BasicFeature {
 
     @Override
     protected SSHResult uninstallComponent(Server server) throws Exception {
-        new SimpleCommand("~/tma-so-software/sources/uninstall.sh", server.getPassword()).execute(executor, server);
+        new SimpleCommand("sudo rm -rf ~/tma-so-software/", server.getPassword()).execute(executor, server);
+        new SimpleCommand("sudo rm -rf ~/tmp/tma-so/", server.getPassword()).execute(executor, server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();
         // After uninstalling, if status is true => uninstall NOK
