@@ -17,6 +17,7 @@ import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.service.ssh.cmd.common.PingCommand;
 import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
 import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
+import com.tts.app.configcenter.service.ssh.feature.HelloWorldFeature;
 import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
 
 @Named
@@ -35,6 +36,7 @@ public class SSHServiceImpl implements SSHService {
     public void init() {
         addFeature(new DockerFeature(commandExecutor));
         addFeature(new DockerComposeFeature(commandExecutor));
+        addFeature(new HelloWorldFeature(commandExecutor));
     }
     
     @Override
