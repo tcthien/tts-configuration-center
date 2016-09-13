@@ -54,13 +54,20 @@ class FeatureService {
     this.loggingService.logDebug('Prepare to uninstall feature------------------------------------------------------------');
     this.loggingService.logJson('FeatureService', 'uninstallFeature-FILTER', data);
     // Make Post request
-    const res = this.http.delete(`${wsUrl}\/ssh\/feature\/${server.ipAddress}`, data);
-    res.success((data, status, headers, config) => {
+    var req = this.http({
+      method: 'DELETE',
+      url: `${wsUrl}\/ssh\/feature\/${server.ipAddress}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    });
+    req.success((data, status, headers, config) => {
       const features = data.sSHFeature;
       this.loggingService.logJson('FeatureService', 'uninstallFeature-RESULT', data);
       callback(features);
     });
-    res.error((data, status, headers, config) => {
+    req.error((data, status, headers, config) => {
       this.loggingService.logError(`failure message: ${data}`);
     });
   }
