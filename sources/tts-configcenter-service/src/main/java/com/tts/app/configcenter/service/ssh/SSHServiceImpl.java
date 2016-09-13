@@ -19,6 +19,7 @@ import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
 import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
 import com.tts.app.configcenter.service.ssh.feature.HelloWorldFeature;
 import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
+import com.tts.app.configcenter.service.ssh.feature.TMASmartOfficeFeature;
 
 @Named
 public class SSHServiceImpl implements SSHService {
@@ -37,6 +38,7 @@ public class SSHServiceImpl implements SSHService {
         addFeature(new DockerFeature(commandExecutor));
         addFeature(new DockerComposeFeature(commandExecutor));
         addFeature(new HelloWorldFeature(commandExecutor));
+        addFeature(new TMASmartOfficeFeature(commandExecutor));
     }
     
     @Override

@@ -76,7 +76,9 @@ public abstract class BasicFeature implements SoftwareFeature {
     protected SSHResult uninstallDependencies(Server server) throws Exception {
         SSHResult rs = null;
         for (SoftwareFeature dep : getDependencies()) {
-            rs = dep.uninstall(server, true);
+            if (dep.check(server)) {
+                rs = dep.uninstall(server, true);
+            }
         }
         return rs;
     }
@@ -84,7 +86,9 @@ public abstract class BasicFeature implements SoftwareFeature {
     protected SSHResult installDependencies(Server server) throws Exception {
         SSHResult rs = null;
         for (SoftwareFeature dep : getDependencies()) {
-            rs = dep.install(server);
+            if (!dep.check(server)) {
+                rs = dep.install(server);
+            }
         }
         return rs;
     }

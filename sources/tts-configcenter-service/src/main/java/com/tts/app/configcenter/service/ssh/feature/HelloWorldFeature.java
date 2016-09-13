@@ -21,8 +21,8 @@ public class HelloWorldFeature extends BasicFeature {
     
     @Override
     public boolean check(Server server) throws Exception {
-        SSHResult rs = new SimpleCommand("/tmp/hello").execute(executor, server);
-        return !rs.getOutputText().contains("no such file or directory");
+        SSHResult rs = new SimpleCommand("sh /tmp/hello").execute(executor, server);
+        return rs.getOutputText().contains("hello");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class HelloWorldFeature extends BasicFeature {
 
     @Override
     protected SSHResult uninstallComponent(Server server) throws Exception {
-        new SimpleCommand("rm /tmp/hello", server.getPassword()).execute(executor, server);
+        new SimpleCommand("rm -rf /tmp/hello", server.getPassword()).execute(executor, server);
         boolean status = check(server);
         SSHResult rs = new SSHResultImpl();
         // After uninstalling, if status is true => uninstall NOK
