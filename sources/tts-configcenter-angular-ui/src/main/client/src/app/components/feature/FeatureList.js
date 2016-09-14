@@ -1,13 +1,21 @@
 class FeatureListController {
   /** @ngInject */
-  constructor($scope, $log, $rootScope, loggingService, featureService) {
+  constructor($scope, $log, $rootScope, loggingService, featureService, commandService) {
     this.parentScope = $scope.$parent;
     this.log = $log;
     this.rootScope = $rootScope;
     this.loggingService = loggingService;
     this.featureService = featureService;
+    this.commandService = commandService;
     $scope.$on('$destroy', () => {
       this.server = null;
+    });
+  }
+
+  runCommand(server, command) {
+    this.commandService.runCommand(server, command, () => {
+      // Request finished => reload feature table
+      //this.rootScope.$emit('reloadCommands');
     });
   }
 
@@ -33,5 +41,6 @@ angular
     controller: FeatureListController,
     bindings: {
       features: '<',
+      commands: '<'
     }
   });

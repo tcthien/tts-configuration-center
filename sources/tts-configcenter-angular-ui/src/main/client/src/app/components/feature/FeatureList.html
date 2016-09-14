@@ -6,7 +6,7 @@ $(document).ready(function(){
 <ul class="row tts-server-info-row">
     <li class="col l12 m12 12 label">
         <ul class="tabs">
-            <li class="tab col s3"><a class="active" href="#featureContainter">Features</a></li>
+            <li class="tab col s3"><a class="active" href="#featureContainter">Softwares</a></li>
             <li class="tab col s3"><a class="active" href="#commandContainter">Commands</a></li>
             <li class="tab col s3"><a href="#consoleContainer">Console</a></li>
         </ul>
@@ -46,33 +46,18 @@ $(document).ready(function(){
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr ng-repeat="command in $ctrl.commands">
                     <td>
-                        TMA SO - Start MQTT Server
+                        <div>
+                            <div class="row rowCommandName">{{command.name}}</div>
+                            <div class="row rowCommandDescription"><i>{{command.description}}</i></div>
+                        </div>
                     </td>
                     <td>
-                        <i class="material-icons material-icons-blue" title="Click to install feature"
-                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        TMA SO - Start OpenHAB Server
-                    </td>
-                    <td>
-                        <i class="material-icons material-icons-blue" title="Click to install feature"
-                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
+                        <i class="material-icons material-icons-green" title="Click to run command"
+                            ng-click="$ctrl.runCommand($ctrl.parentScope.server, command)">play_circle_filled</i>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        TMA SO - Start All
-                    </td>
-                    <td>
-                        <i class="material-icons material-icons-blue" title="Click to install feature"
-                            ng-click="$ctrl.installFeature($ctrl.parentScope.server, feature)">add_circle</i>
-                    </td>
-                  </tr>
                 </tbody>
             </table>
         </div>

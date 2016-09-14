@@ -1,12 +1,13 @@
 class ServerPageController {
   /** @ngInject */
-  constructor($rootScope, $scope, $stateParams, loggingService, zoneService, serverService, featureService) {
+  constructor($rootScope, $scope, $stateParams, loggingService, zoneService, serverService, featureService, commandService) {
     this.rootScope = $rootScope;
     this.scope = $scope;
     this.loggingService = loggingService;
     this.zoneService = zoneService;
     this.serverService = serverService;
     this.featureService = featureService;
+    this.commandService = commandService;
     this.stateParams = $stateParams;
     // URL Params
     if ($stateParams !== null) {
@@ -21,10 +22,15 @@ class ServerPageController {
     this.rootScope.$on('reloadFeatures', () => {
       this.reloadFeatures(this.server);
     });
+    /*
+    this.rootScope.$on('reloadCommands', () => {
+      this.reloadCommands(this.server);
+    });*/
     // Unregister listener on root if controller is destroyed
     $scope.$on('$destroy', () => {
       this.rootScope.$$listeners.reloadZoneInfoLeft = [];
       this.rootScope.$$listeners.reloadFeatures = [];
+      //this.rootScope.$$listeners.reloadCommands = [];
       this.rootScope.serverId = null;
     });
   }
@@ -40,7 +46,7 @@ class ServerPageController {
           if (server.id == serverId) {
             this.server = server;
             this.scope.server = server;
-            this.reloadFeatures(this.server);
+            this.reloadFeaturesAndCommands(this.server);
             break;
           }
         }
@@ -50,12 +56,23 @@ class ServerPageController {
   }
 
   reloadFeatures(server) {
-    // If finding server -> load features
-    this.loggingService.logDebug('Prepare to load Feature ----------------------------------------------------');
-    this.loggingService.logJson('ServerPageController', 'loadFeatures-For', server);
     this.featureService.loadByServer(server, features => {
       this.features = features;
     });
+  }
+
+  reloadCommands(server) {
+    this.commandService.loadByServer(server, commands => {
+      this.commands = commands;
+    });
+  }
+
+  reloadFeaturesAndCommands(server) {
+    // If finding server -> load features
+    this.loggingService.logDebug('Prepare to load Feature ----------------------------------------------------');
+    this.loggingService.logJson('ServerPageController', 'loadFeatures-For', server);
+    this.reloadFeatures(server);
+    this.reloadCommands(server);
   }
 
   openServerCreationDlgForEdit() {
