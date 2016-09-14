@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.ssh.cmd.common;
+package com.tts.app.configcenter.service.ssh.common;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;

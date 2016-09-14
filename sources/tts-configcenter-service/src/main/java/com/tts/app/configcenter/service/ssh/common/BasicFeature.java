@@ -1,17 +1,21 @@
-package com.tts.app.configcenter.service.ssh.feature;
+package com.tts.app.configcenter.service.ssh.common;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
+import com.tts.app.configcenter.service.ssh.cmd.UICommand;
 
 public abstract class BasicFeature implements SoftwareFeature {
 
     protected SSHCommandExecutor executor;
     protected List<SoftwareFeature> dependencies = new ArrayList<>();
+    private Map<String, UICommand> uiCommands = new LinkedHashMap<>();
     
     public BasicFeature(SSHCommandExecutor executor) {
         this.executor = executor;
@@ -92,5 +96,13 @@ public abstract class BasicFeature implements SoftwareFeature {
         }
         return rs;
     }
-
+    
+    @Override
+    public Map<String, UICommand> getUICommands() {
+        return uiCommands;
+    }
+    
+    public void addUICommand(UICommand uiCommand) {
+        uiCommands.put(uiCommand.getName(), uiCommand);
+    }
 }

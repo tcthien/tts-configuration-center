@@ -13,13 +13,15 @@ import org.ops4j.pax.cdi.api.OsgiService;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.server.ServerDao;
+import com.tts.app.configcenter.model.ssh.SSHCommand;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
-import com.tts.app.configcenter.service.ssh.cmd.common.PingCommand;
-import com.tts.app.configcenter.service.ssh.feature.DockerComposeFeature;
-import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
-import com.tts.app.configcenter.service.ssh.feature.HelloWorldFeature;
-import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
-import com.tts.app.configcenter.service.ssh.feature.TMASmartOfficeFeature;
+import com.tts.app.configcenter.service.ssh.cmd.UICommand;
+import com.tts.app.configcenter.service.ssh.common.HelloWorldFeature;
+import com.tts.app.configcenter.service.ssh.common.PingCommand;
+import com.tts.app.configcenter.service.ssh.common.SoftwareFeature;
+import com.tts.app.configcenter.service.ssh.docker.DockerComposeFeature;
+import com.tts.app.configcenter.service.ssh.docker.DockerFeature;
+import com.tts.app.configcenter.service.ssh.tmaso.TMASmartOfficeFeature;
 
 @Named
 public class SSHServiceImpl implements SSHService {
@@ -73,6 +75,17 @@ public class SSHServiceImpl implements SSHService {
             rs.put(feature, status);
         }
         return rs;
+    }
+    
+    @Override
+    public SSHResult executeCommand(String ipAddress, SSHCommand command) throws Exception {
+        Server server = serverDao.findByServerIP(ipAddress);
+        
+        SoftwareFeature sshFeature = features.get(command.getFeature());
+        Map<String, UICommand> uiCommands = sshFeature.getUICommands();
+        UICommand uiCommand = uiCommands.get(command.getName());
+        
+        return uiCommand.execute(commandExecutor, server);
     }
 
     @Override

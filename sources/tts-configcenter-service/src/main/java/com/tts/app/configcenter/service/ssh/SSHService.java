@@ -6,7 +6,8 @@ import java.util.Map;
 import javax.jws.WebService;
 
 import com.tts.app.configcenter.model.ssh.SSHFeature;
-import com.tts.app.configcenter.service.ssh.feature.SoftwareFeature;
+import com.tts.app.configcenter.model.ssh.SSHCommand;
+import com.tts.app.configcenter.service.ssh.common.SoftwareFeature;
 
 @WebService
 public interface SSHService {
@@ -25,4 +26,6 @@ public interface SSHService {
     SSHResult uninstallFeature(String ipAddress, SSHFeature feature, boolean removeDependency) throws Exception;
 
     void addFeature(SoftwareFeature feature);
+    
+    SSHResult executeCommand(String ipAddress, SSHCommand command) throws Exception;
 }

@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.ssh.cmd.docker;
+package com.tts.app.configcenter.service.ssh.docker;
 
 import com.tts.app.configcenter.service.ssh.cmd.CompositeCommand;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;

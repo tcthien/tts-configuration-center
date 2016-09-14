@@ -1,4 +1,4 @@
-package com.tts.app.configcenter.service.ssh.feature;
+package com.tts.app.configcenter.service.ssh.docker;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
@@ -6,7 +6,7 @@ import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
-import com.tts.app.configcenter.service.ssh.cmd.docker.InstallDockerCommand;
+import com.tts.app.configcenter.service.ssh.common.BasicFeature;
 
 public class DockerFeature extends BasicFeature {
 

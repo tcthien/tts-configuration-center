@@ -6,7 +6,7 @@ import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutorImpl;
 import com.tts.app.configcenter.service.ssh.SSHResult;
-import com.tts.app.configcenter.service.ssh.feature.DockerFeature;
+import com.tts.app.configcenter.service.ssh.docker.DockerFeature;
 
 public class DockerFeatureTest {
 

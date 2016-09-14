@@ -1,18 +1,32 @@
-package com.tts.app.configcenter.service.ssh.feature;
+package com.tts.app.configcenter.service.ssh.tmaso;
 
 import com.tts.app.configcenter.model.server.Server;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.service.ssh.SSHCommandExecutor;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHResultImpl;
-import com.tts.app.configcenter.service.ssh.cmd.CompositeCommand;
 import com.tts.app.configcenter.service.ssh.cmd.SimpleCommand;
+import com.tts.app.configcenter.service.ssh.common.BasicFeature;
+import com.tts.app.configcenter.service.ssh.docker.DockerComposeFeature;
+import com.tts.app.configcenter.service.ssh.docker.DockerFeature;
 
 public class TMASmartOfficeFeature extends BasicFeature {
 
     public TMASmartOfficeFeature(SSHCommandExecutor executor) {
         super(executor);
         addDependency(new DockerFeature(executor));
+        addDependency(new DockerComposeFeature(executor));
+        addUICommands();
+    }
+    
+    private void addUICommands() {
+        String scriptFolder = "~/tma-so-software/sources/scripts/bin";
+        // MQTT Server commands
+        addUICommand(new SimpleCommand(scriptFolder + "/run start u mqtt", null, "TMA SO - Start MQTT", "Used to start MQTT Server"));
+        addUICommand(new SimpleCommand(scriptFolder + "/run stop u mqtt", null, "TMA SO - Stop MQTT", "Used to stop MQTT Server"));
+        // OpenHAB Server commands
+        addUICommand(new SimpleCommand(scriptFolder + "/run start u openhab2", null, "TMA SO - Start OpenHAB2", "Used to start OpenHAB2 Server"));
+        addUICommand(new SimpleCommand(scriptFolder + "/run stop u openhab2", null, "TMA SO - Stop  OpenHAB2", "Used to stop OpenHAB2 Server"));
     }
 
     @Override
@@ -26,19 +40,6 @@ public class TMASmartOfficeFeature extends BasicFeature {
         return rs.getOutputText().contains("TMA Smart Office");
     }
     
-    static class InstallTMASmartOfficeCommand extends CompositeCommand {
-
-        public InstallTMASmartOfficeCommand(String sudoPass) {
-            subCommands.add(new SimpleCommand("mkdir ~/tmp"));
-            subCommands.add(new SimpleCommand("mkdir ~/tmp/tma-so"));
-            subCommands.add(new SimpleCommand("chmod 777 ~/tmp/tma-so"));
-            subCommands.add(new SimpleCommand("curl -L https://raw.githubusercontent.com/tcthien/tma-so/master/install.sh > ~/tmp/tma-so/install.sh"));
-            subCommands.add(new SimpleCommand("chmod +x ~/tmp/tma-so/install.sh"));
-            subCommands.add(new SimpleCommand("~/tmp/tma-so/install.sh ubuntu"));
-        }
-
-    }
-
     @Override
     protected SSHResult installComponent(Server server) throws Exception {
         new InstallTMASmartOfficeCommand(server.getPassword()).execute(executor, server);
