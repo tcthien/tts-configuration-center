@@ -31,7 +31,6 @@ class CommandService {
     const res = this.http.post(`${wsUrl}\/ssh\/execCmd\/${server.ipAddress}`, data);
     res.success((data, status, headers, config) => {
       this.loggingService.logJson('CommandService', 'runCommand-RESULT', data);
-      Materialize.toast('Command has been submitted to server', 2000);
     });
     res.error((data, status, headers, config) => {
       this.loggingService.logError(`failure message: ${data}`);

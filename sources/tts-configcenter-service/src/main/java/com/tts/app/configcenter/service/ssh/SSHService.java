@@ -28,4 +28,6 @@ public interface SSHService {
     void addFeature(SoftwareFeature feature);
     
     SSHResult executeCommand(String ipAddress, SSHCommand command) throws Exception;
+
+    String getLog(String ipAddress);
 }

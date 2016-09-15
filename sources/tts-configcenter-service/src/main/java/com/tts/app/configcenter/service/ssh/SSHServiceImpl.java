@@ -103,4 +103,9 @@ public class SSHServiceImpl implements SSHService {
         SoftwareFeature sshFeature = features.get(feature);
         return sshFeature.uninstall(server, removeDependency);
     }
+    
+    @Override
+    public String getLog(String ipAddress) {
+        return commandExecutor.getLog(ipAddress);
+    }
 }

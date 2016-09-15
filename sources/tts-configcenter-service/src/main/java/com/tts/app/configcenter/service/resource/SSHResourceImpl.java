@@ -17,9 +17,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tts.app.configcenter.model.ssh.ConsoleLog;
 import com.tts.app.configcenter.model.ssh.SSHCommand;
 import com.tts.app.configcenter.model.ssh.SSHFeature;
 import com.tts.app.configcenter.model.ssh.SSHStatus;
+import com.tts.app.configcenter.service.ssh.SSHConsoleLog;
 import com.tts.app.configcenter.service.ssh.SSHResult;
 import com.tts.app.configcenter.service.ssh.SSHService;
 import com.tts.app.configcenter.service.ssh.cmd.UICommand;
@@ -32,6 +34,9 @@ public class SSHResourceImpl extends LogicResourceImpl {
 
     @Inject
     SSHService sshService;
+    
+    @Inject
+    SSHConsoleLog sshConsoleLog;
 
     @GET
     @Path("/ping/{srcIpAddress}/{desIpAddress}")
@@ -48,6 +53,13 @@ public class SSHResourceImpl extends LogicResourceImpl {
     protected SSHStatus convertToSSHStatus(Boolean status) {
         SSHStatus pingStatus = status != null ? new SSHStatus(status.toString()) : null;
         return pingStatus;
+    }
+    
+    @GET
+    @Path("/log/{ipAddress}")
+    public ConsoleLog getLog(@PathParam("ipAddress") String ipAddress) throws Exception {
+        String logMessage = sshService.getLog(ipAddress);
+        return new ConsoleLog(logMessage);
     }
     
     @POST
