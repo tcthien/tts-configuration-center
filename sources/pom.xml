@@ -21,6 +21,8 @@
         <module>tts-configcenter-features</module>
         <module>tts-configcenter-service</module>
         <module>tts-configcenter-angular-ui</module>
+        <!-- This module used to work with MQTT -->
+        
   </modules>
 
     <dependencies>
