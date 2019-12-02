@@ -28,14 +28,14 @@ public class Server extends GenericModel {
     public Zone getZone() {
         return zone;
     }
-    
+
     @Override
     public String toString() {
         return TTSPojoUtil.toString("Server: " + serverName);
     }
-    
+
     public String getUserName() {
-        return userName;
+        return userName;z
     }
 
     public void setUserName(String userName) {
